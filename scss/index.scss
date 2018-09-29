@@ -1,4 +1,10 @@
-body {
-    background: blue;
-    color: white;
+article {
+    background: aliceblue;
+    color: black;
+    border: 6px solid blue
+}
+
+section {
+    outline: 6px solid red;
+    color: black;
 }
