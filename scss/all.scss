@@ -1,0 +1,11 @@
+@import './utilities/index';
+
+.game {
+    border: 1px solid grey;
+}
+
+@include mobile {
+    body {
+        background: black;
+    }
+}
