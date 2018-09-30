@@ -1,16 +1,17 @@
 import { IPlayer, IGame } from "./types";
 
 export class Game implements IGame {
-    constructor(player1: IPlayer, player2: IPlayer, prelims: any[]) {
+    constructor(player1: IPlayer, player2: IPlayer, prelims: any[], id: number) {
         this.player1 = player1;
         this.player2 = player2;
         this.finished = false;
         this.winner = null;
         this.loser = null;
         this.prelims = prelims;
+        this.id = id;
     }
 
-    id: string;
+    id: number;
     player1: IPlayer;
     player2: IPlayer;
     numberOfPlayers: number;

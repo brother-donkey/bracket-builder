@@ -2,6 +2,8 @@ import { IPlayer, BracketItem, IGame } from "./types";
 import { Player, TBAPlayer } from "./player";
 import { Game } from "./game";
 
+export let gameId: number = 0;
+
 export function createBracket(arr: IPlayer[]) {
     if (arr.length <= 2) {
         return arr;
@@ -36,12 +38,14 @@ export function createBracket(arr: IPlayer[]) {
 export function createGame(bracket: BracketItem): IGame {
     // if its an array of arrays, make a game with TBA players
     let game;
+    gameId++;
 
     if (Array.isArray(bracket[0]) && Array.isArray(bracket[1])) {
         return game = new Game(
             new TBAPlayer(),
             new TBAPlayer,
-            [createGame((bracket[0] as any)), createGame((bracket[0] as any))]);
+            [createGame((bracket[0] as any)), createGame((bracket[0] as any))],
+            gameId);
     }
 
     const player1 = bracket[0] as IPlayer;
@@ -50,7 +54,8 @@ export function createGame(bracket: BracketItem): IGame {
     return new Game(
         new Player(player1.name, player1.seed),
         new Player(player2.name, player2.seed),
-        []
+        [],
+        gameId
     )
 }
 

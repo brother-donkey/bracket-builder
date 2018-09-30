@@ -1,11 +1,59 @@
 @import './utilities/index';
 
-.game {
-    border: 1px solid grey;
+$body-background: #a2a3bb;
+$game-background: #8884ff;
+$game-color: #fbf9ff;
+$game-border: transparentize($game-color, .6);
+$border-size: 4px;
+$game-secondary: #b3b7ee;
+
+html {
+    box-sizing: border-box;
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
 }
 
-@include mobile {
-    body {
-        background: black;
+body {
+    background: $body-background;
+}
+
+.game {
+    background: $game-background;
+    color: $game-color;
+    margin: 10px auto;
+    border: $border-size solid $game-border;    
+    border-radius: 8px;
+}
+
+.player-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 1fr;
+}
+
+.player,
+.score {
+    border-top: $border-size solid $game-border;
+    padding: 4px;
+    text-align: center;
+}
+
+.player {
+    padding: .5em;
+    font-size: 1.5em;
+}
+
+.winner,
+.game-name {
+    border-top: $border-size solid $game-border;
+    padding: 4px;
+    text-align: center;
+
+    &:first-child {
+        border-top: none;
     }
 }

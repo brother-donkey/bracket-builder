@@ -3,6 +3,7 @@ import { Game } from "./game";
 import { Player, TBAPlayer } from "./player";
 import { createBracket, addByes, createGame } from "./setup";
 import { getNumberOfGames } from "./utilities";
+import { renderGame } from "./render";
 
 
 // just make some players
@@ -23,3 +24,6 @@ const baseBracket = createBracket(arr);
 const tourney = createGame(baseBracket); // recursively creates all games
 
 console.log({ tourney });
+
+const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
+renderGame(tourney, tourneyElt);

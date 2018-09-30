@@ -18,7 +18,7 @@ export interface Tourney {
 }
 
 export interface IGame {
-    id: string;
+    id: number;
     player1: IPlayer;
     player2: IPlayer;
     declareWinner: (player: IPlayer, score: [number, number]) => IPlayer;
