@@ -21,6 +21,10 @@ body {
     background: $body-background;
 }
 
+.tourney {
+    display: flex;
+}
+
 .game {
     background: $game-background;
     color: $game-color;

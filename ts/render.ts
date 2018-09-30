@@ -2,8 +2,10 @@ import { IGame } from "./types";
 
 export function renderGame(game: IGame, container: HTMLElement) {
     const gameElt = document.createElement('article');
+    const readyToPlay = gameReadyToPlay(game);
+
     gameElt.insertAdjacentHTML('afterbegin', `
-    <div class="game" data-uid-game-id="${game.id}">
+    <div class="game" data-game-id="${game.id}" ${readyToPlay ? '' : 'hidden'}>
         <div class="game-name">${game.id}</div>
         <div class="winner"></div>
         <div class="player-container">
@@ -15,4 +17,16 @@ export function renderGame(game: IGame, container: HTMLElement) {
     `)
 
     container.appendChild(gameElt);
+
+    game.prelims.forEach(game => {
+        renderGame(game, container);
+    });
+}
+
+export function selectAllGameElements(): HTMLElement[] {
+    return Array.from(document.querySelectorAll('[data-game-id]')) as HTMLElement[];
+}
+
+export function gameReadyToPlay(game: IGame) {
+    return game.player1.name !== 'TBD' || game.player2.name !== 'TBD';
 }

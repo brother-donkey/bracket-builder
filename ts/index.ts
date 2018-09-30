@@ -3,7 +3,7 @@ import { Game } from "./game";
 import { Player, TBAPlayer } from "./player";
 import { createBracket, addByes, createGame } from "./setup";
 import { getNumberOfGames } from "./utilities";
-import { renderGame } from "./render";
+import { renderGame, selectAllGameElements } from "./render";
 
 
 // just make some players
@@ -27,3 +27,5 @@ console.log({ tourney });
 
 const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
 renderGame(tourney, tourneyElt);
+
+console.log(selectAllGameElements());
