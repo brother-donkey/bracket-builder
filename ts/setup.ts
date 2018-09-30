@@ -38,23 +38,23 @@ export function createBracket(arr: IPlayer[]) {
 export function createGame(bracket: BracketItem): IGame {
     // if its an array of arrays, make a game with TBA players
 
-    if (Array.isArray(bracket[0]) && Array.isArray(bracket[1])) {
+    if (!Array.isArray(bracket[0]) && !Array.isArray(bracket[1])) {
+        const player1 = bracket[0] as IPlayer;
+        const player2 = bracket[1] as IPlayer;
+
         return new Game(
-            new TBAPlayer(),
-            new TBAPlayer,
-            [createGame((bracket[0] as any)), createGame((bracket[1] as any))],
-            gameId += 1);
+            new Player(player1.name, player1.seed),
+            new Player(player2.name, player2.seed),
+            [],
+            gameId += 1
+        )
     }
 
-    const player1 = bracket[0] as IPlayer;
-    const player2 = bracket[1] as IPlayer;
-
     return new Game(
-        new Player(player1.name, player1.seed),
-        new Player(player2.name, player2.seed),
-        [],
-        gameId += 1
-    )
+        new TBAPlayer(),
+        new TBAPlayer,
+        [createGame((bracket[0] as any)), createGame((bracket[1] as any))],
+        gameId += 1);
 }
 
 export function addByes(arr: IPlayer[]) {
