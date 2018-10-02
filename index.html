@@ -10,6 +10,44 @@
 </head>
 
 <body>
+    <main id="tourney">
+        <div class="display-grid">
+            <div class="welcome">
+                <h1>Bracket Builder</h1>
+                <p>Welcome! Want to play a tourney with your friends? We can help. Just input the names of all the
+                    players in the the form below and we'll generate a bracket for you.</p>
+            </div>
+        </div>
+
+        <form action="post" id="player-input-form" class="input-form">
+            <fieldset class="form-player-container">
+                <div class="form-player-input-container">
+                    <label for="size_1">Player Name</label>
+                    <input type="text" name="size" id="size_1" value="small">
+                </div>
+                <div class="form-seed-container">
+                    <label for="size_2">Seed</label>
+                    <input type="text" name="size" id="size_2" value="small">
+                </div>
+                <div class="form-add-player-container">
+                    <button class="button add-player" type="button"></button>
+                </div>
+            </fieldset>
+            <fieldset class="form-player-container">
+                <div class="form-player-input-container">
+                    <label for="size_1">Player Name</label>
+                    <input type="text" name="size" id="size_1" value="small">
+                </div>
+                <div class="form-seed-container">
+                    <label for="size_2">Seed</label>
+                    <input type="text" name="size" id="size_2" value="small">
+                </div>
+                <div class="form-add-player-container">
+                    <button class="button add-player" type="button"></button>
+                </div>
+            </fieldset>
+        </form>
+    </main>
     <!-- <div class="game">
         <div class="game-name">Game id</div>
         <div class="winner">Winner</div>
@@ -29,10 +67,6 @@
             <div class="player">Player 2</div>
         </div>
     </div> -->
-
-    <main id="tourney">
-
-    </main>
 
     <script src="./ts/index.ts"></script>
 </body>
