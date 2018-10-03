@@ -14,36 +14,32 @@
         <div class="display-grid">
             <div class="welcome">
                 <h1>Bracket Builder</h1>
-                <p>Welcome! Want to play a tourney with your friends? We can help. Just input the names of all the
-                    players in the the form below and we'll generate a bracket for you.</p>
+                <p>Welcome! Want to play a tourney with your friends? We can help. Just input the names of all the players in
+                    the the form below and we'll generate a bracket for you.</p>
             </div>
         </div>
 
         <form action="post" id="player-input-form" class="input-form">
             <fieldset class="form-player-container">
                 <div class="form-player-input-container">
-                    <label for="size_1">Player Name</label>
-                    <input type="text" name="size" id="size_1" value="small">
+                    <input class="input" type="text" name="size" placeholder="Name" id="size_1">
                 </div>
                 <div class="form-seed-container">
-                    <label for="size_2">Seed</label>
-                    <input type="text" name="size" id="size_2" value="small">
+                    <input class="input seed" type="text" placeholder="Seed" name="size" id="size_2" value="0">
                 </div>
                 <div class="form-add-player-container">
-                    <button class="button add-player" type="button"></button>
+                    <button class="button add-player" type="button">Add</button>
                 </div>
             </fieldset>
             <fieldset class="form-player-container">
                 <div class="form-player-input-container">
-                    <label for="size_1">Player Name</label>
-                    <input type="text" name="size" id="size_1" value="small">
+                    <input class="input" type="text" name="size" placeholder="Name" id="size_1" value="name">
                 </div>
                 <div class="form-seed-container">
-                    <label for="size_2">Seed</label>
-                    <input type="text" name="size" id="size_2" value="small">
+                    <input class="input seed" type="text" placeholder="Seed" name="size" id="size_2" value="0">
                 </div>
                 <div class="form-add-player-container">
-                    <button class="button add-player" type="button"></button>
+                    <button class="button add-player" type="button">Add</button>
                 </div>
             </fieldset>
         </form>

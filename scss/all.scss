@@ -1,7 +1,6 @@
 @import './utilities/index';
-@import './grid';
 
-$body-background: #a2a3bb;
+$body-background: white;
 $game-background: #8884ff;
 $game-color: #fbf9ff;
 $game-border: transparentize($game-color, .6);
@@ -62,3 +61,4 @@ body {
         border-top: none;
     }
 }
+@import './grid';
