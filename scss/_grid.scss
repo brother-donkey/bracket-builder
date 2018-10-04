@@ -11,7 +11,8 @@
 }
 
 .form-player-container {
-	margin: 12px;
+	margin-top: 12px;
+	margin-bottom: 12px;
 	padding: 0;
 	display: grid;
 	grid-template-columns: 2.5fr 1fr 1fr;
@@ -19,6 +20,32 @@
 	border: 4px solid $game-secondary;
 	overflow: hidden;
 	background: $game-secondary;
+}
+
+#tournament-roster {
+	font-size: 12px;
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	grid-template-rows: 1fr;
+	border: 4px solid $game-secondary;
+
+	> * {
+		margin: 4px 12px;
+	}
+}
+
+.roster-label {
+	border-bottom: 4px solid $game-secondary;
+	font-weight: bold;
+}
+
+.roster-player {
+	margin-top: 4px;
+	
+	&.name {
+		border-left: 4px solid $game-background;
+		padding-left: 8px;
+	}
 }
 
 .button {
@@ -39,8 +66,7 @@
 	&:hover,
 	&:focus {
 		outline: none;
-		background-color: darken($game-secondary, 2%);
-		border-color: lighten($game-secondary, 2%);
+		border-color: $game-background;
 	}
 }
 

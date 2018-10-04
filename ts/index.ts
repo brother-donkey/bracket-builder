@@ -4,7 +4,7 @@ import { Player, TBAPlayer } from "./player";
 import { createBracket, addByes, createGame } from "./setup";
 import { getNumberOfGames } from "./utilities";
 import { renderGame, selectAllGameElements } from "./render";
-
+import { playerInputForm, handlePlayerInput } from './player-input';
 
 // just make some players
 
@@ -29,3 +29,5 @@ const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
 renderGame(tourney, tourneyElt);
 
 console.log(selectAllGameElements());
+
+handlePlayerInput();

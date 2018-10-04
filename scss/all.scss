@@ -1,5 +1,9 @@
 @import './utilities/index';
 
+html {
+    font-family: $family-sans-serif;
+}
+
 $body-background: white;
 $game-background: #8884ff;
 $game-color: #fbf9ff;
@@ -24,6 +28,8 @@ body {
 .tourney {
     display: flex;
 }
+
+*[hidden] { display: none; }
 
 .game {
     background: $game-background;
