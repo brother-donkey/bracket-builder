@@ -9,9 +9,8 @@ export const tournamentRoster = document.getElementById('tournament-roster') as 
 
 playerInputForm.addEventListener('submit', e => {
     e.preventDefault();
-    console.log(e.target.value);
+    window.dispatchEvent(new CustomEvent('starttournament'));
 })
-// add event listener to the add button - ev dele
 
 export function handlePlayerInput() {
     playerInputForm.insertAdjacentHTML('afterbegin', buildNewPlayerInput(1));
@@ -40,11 +39,8 @@ export function handlePlayerInput() {
             playerName.placeholder = `Enter a name!`;
         }
 
-
-        console.log(inputPlayers)
         updateRoster(inputPlayers);
     });
-
 }
 
 export function buildNewPlayerInput(playerId: number) {

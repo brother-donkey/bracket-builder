@@ -4,29 +4,29 @@ import { Player, TBAPlayer } from "./player";
 import { createBracket, addByes, createGame } from "./setup";
 import { getNumberOfGames } from "./utilities";
 import { renderGame, selectAllGameElements } from "./render";
-import { playerInputForm, handlePlayerInput } from './player-input';
+import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input';
 
 // just make some players
 
-const arr = [] as IPlayer[];
+window.addEventListener('starttournament', () => {
+    console.log('start it');
+    const players = inputPlayers.map(({ name, seed }) => {
+        return new Player(name, seed);
+    })
 
-for (let i = 0; i < 13; i++) {
-    const player = new Player(`Player ${i + 1}`, 1);
-    arr.push(player);
-}
+    // create tourney strucutre
+    const completeArr = addByes(players) as IPlayer[];
+    const numberOfGames = getNumberOfGames(completeArr.length);
+    let currentGameId = numberOfGames; // decrement as games are assigned their ids
 
-// create tourney strucutre
-const completeArr = addByes(arr) as IPlayer[];
-const numberOfGames = getNumberOfGames(completeArr.length);
-let currentGameId = numberOfGames; // decrement as games are assigned their ids
+    const baseBracket = createBracket(players);
+    const tourney = createGame(baseBracket); // recursively creates all games
 
-const baseBracket = createBracket(arr);
-const tourney = createGame(baseBracket); // recursively creates all games
+    console.log({ tourney });
 
-console.log({ tourney });
-
-const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
-renderGame(tourney, tourneyElt);
+    const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
+    renderGame(tourney, tourneyElt);
+})
 
 console.log(selectAllGameElements());
 
