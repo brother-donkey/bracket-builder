@@ -1,0 +1,79 @@
+
+// 11 columns wide with 64
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.bracket-64 {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr) 3fr repeat(5, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+
+  .grid-item {
+    border: 1px dashed black;
+    text-align: center;
+    // // if less than 32 -> odd
+    // &:nth-child(odd) {
+    //     grid-column-start: 1;
+    // }
+    // // if more than 32-> odd?
+    // &:nth-child(even) {
+    //     grid-column-start: 11;
+    // }
+
+    &:nth-child(64n+1) {
+        grid-column-start: 1;
+        grid-row-start: 1;
+        background: blue;
+    }
+
+    &:nth-child(64n+2) {
+        grid-column-start: 11;
+        grid-row-start: 1;
+        background: blue;
+    }
+
+   &:nth-child(64n+3) {
+        grid-column-start: 11;
+        grid-row-start: 17;
+        background: blue;
+    }
+
+    &:nth-child(64n+4) {
+        grid-column-start: 1;
+        grid-row-start: 17;
+        background: blue;
+    }
+
+
+    &:nth-child(64n+5) {
+        grid-column-start: 1;
+        grid-row-start: 31;
+        background: red;
+    }
+
+    &:nth-child(64n+6) {
+        grid-column-start: 11;
+        grid-row-start: 31;
+        background: red;
+    }
+
+   &:nth-child(64n+7) {
+        grid-column-start: 11;
+        grid-row-start: 15;
+        background: red;
+    }
+
+    &:nth-child(64n+8) {
+        grid-column-start: 1;
+        grid-row-start: 15;
+        background: red;
+    }
+
+
+
+  }
+}
