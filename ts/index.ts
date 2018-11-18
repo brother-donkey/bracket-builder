@@ -8,11 +8,10 @@ import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input
 
 // just make some players
 
-window.addEventListener('starttournament', () => {
-    console.log('start it');
+window.addEventListener('StartTournament', () => {
     const players = inputPlayers.map(({ name, seed }) => {
         return new Player(name, seed);
-    })
+    });
 
     // create tourney strucutre
     const completeArr = addByes(players) as IPlayer[];

@@ -63,7 +63,7 @@ export function addByes(arr: IPlayer[]) {
     // determine if divisible by 4
     if (remainder !== 0) {
         for (let i = 0; i < remainder; i++) {
-            arr.push(new Player(`Bye ${i}`, 16)); // push in some meaning less items to give top seeds a by
+            arr.push(new Player(`Bye ${i}`, 16)); // push in some meaningless items to give top seeds a by
         }
     }
     return arr;
