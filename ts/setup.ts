@@ -1,10 +1,12 @@
 import { IPlayer, BracketItem, IGame } from "./types";
 import { Player, TBAPlayer } from "./player";
 import { Game } from "./game";
+import { getNumberOfRounds } from "./utilities";
 
 export let gameId: number = 0;
 
 export function createBracket(arr: IPlayer[]) {
+
     if (arr.length <= 2) {
         return arr;
     }
@@ -35,8 +37,8 @@ export function createBracket(arr: IPlayer[]) {
     return bracket;
 }
 
-export function createGame(bracket: BracketItem): IGame {
-    // if its an array of arrays, make a game with TBA players
+export function createGame(bracket: BracketItem, round: number): IGame {
+    // if its an array of arrays, make a game with TBA players;
 
     if (!Array.isArray(bracket[0]) && !Array.isArray(bracket[1])) {
         const player1 = bracket[0] as IPlayer;
@@ -46,15 +48,20 @@ export function createGame(bracket: BracketItem): IGame {
             new Player(player1.name, player1.seed),
             new Player(player2.name, player2.seed),
             [],
-            gameId += 1
+            gameId += 1,
+            round
         )
     }
+
+    const previousRound = round - 1;
 
     return new Game(
         new TBAPlayer(),
         new TBAPlayer,
-        [createGame((bracket[0] as any)), createGame((bracket[1] as any))],
-        gameId += 1);
+        [createGame((bracket[0] as any), previousRound), createGame((bracket[1] as any), previousRound],
+        gameId += 1,
+        round
+    );
 }
 
 export function addByes(arr: IPlayer[]) {

@@ -3,9 +3,9 @@ import { IGame } from "./types";
 export function renderGame(game: IGame, container: HTMLElement) {
     const gameElt = document.createElement('article');
     const readyToPlay = gameReadyToPlay(game);
-
+    //data-game-id="${game.id}" ${readyToPlay ? '' : 'hidden'}
     gameElt.insertAdjacentHTML('afterbegin', `
-    <div class="game" data-game-id="${game.id}" ${readyToPlay ? '' : 'hidden'}>
+    <div class="game round-${game.round}">
         <div class="game-name">${game.id}</div>
         <div class="winner"></div>
         <div class="player-container">

@@ -1,7 +1,7 @@
 import { IPlayer, IGame } from "./types";
 
 export class Game implements IGame {
-    constructor(player1: IPlayer, player2: IPlayer, prelims: any[], id: number) {
+    constructor(player1: IPlayer, player2: IPlayer, prelims: any[], id: number, round: number) {
         this.player1 = player1;
         this.player2 = player2;
         this.finished = false;
@@ -9,6 +9,7 @@ export class Game implements IGame {
         this.loser = null;
         this.prelims = prelims;
         this.id = id;
+        this.round = round;
     }
 
     id: number;
@@ -19,6 +20,7 @@ export class Game implements IGame {
     winner: IPlayer | null;
     loser: IPlayer | null;
     prelims: any[];
+    round: number;
 
     declareWinner = (winner: IPlayer, score: [number, number]) => {
         this.winner = winner;

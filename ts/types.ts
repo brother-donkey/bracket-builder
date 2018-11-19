@@ -26,6 +26,7 @@ export interface IGame {
     loser: IPlayer | null;
     finished: boolean;
     prelims: any[];
+    round: number;
 }
 
 export interface IRecord {
