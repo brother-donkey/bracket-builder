@@ -27,6 +27,7 @@ export interface IGame {
     finished: boolean;
     prelims: any[];
     round: number;
+    parent?: IGame | null;
 }
 
 export interface IRecord {

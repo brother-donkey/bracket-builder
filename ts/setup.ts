@@ -1,7 +1,6 @@
 import { IPlayer, BracketItem, IGame } from "./types";
 import { Player, TBAPlayer } from "./player";
 import { Game } from "./game";
-import { getNumberOfRounds } from "./utilities";
 
 export let gameId: number = 0;
 
@@ -38,7 +37,8 @@ export function createBracket(arr: IPlayer[]) {
 }
 
 export function createGame(bracket: BracketItem, round: number): IGame {
-    // if its an array of arrays, make a game with TBA players;
+
+    // bottom level of games, no parent
 
     if (!Array.isArray(bracket[0]) && !Array.isArray(bracket[1])) {
         const player1 = bracket[0] as IPlayer;
@@ -55,9 +55,11 @@ export function createGame(bracket: BracketItem, round: number): IGame {
 
     const previousRound = round - 1;
 
+    // games that are part of later rounds
+
     return new Game(
         new TBAPlayer(),
-        new TBAPlayer,
+        new TBAPlayer(),
         [createGame((bracket[0] as any), previousRound), createGame((bracket[1] as any), previousRound)],
         gameId += 1,
         round
@@ -74,4 +76,36 @@ export function addByes(arr: IPlayer[]) {
         }
     }
     return arr;
+}
+
+export function flattenGames(game: IGame, arr: IGame[]): IGame[] {
+    arr.push(game);
+
+    if (game.prelims.length) {
+        game.prelims.forEach(prelim => {
+            flattenGames(prelim, arr);
+        });
+    }
+
+    return arr;
+}
+
+export function sortByRound(gameArray: IGame[]) {
+    gameArray.sort((a, b) => {
+        if (a.round > b.round) {
+            return -1;
+        } else {
+            return 1;
+        }
+    })
+}
+
+export function assignParentGames(game: IGame): IGame {
+    if (game.prelims.length) {
+        game.prelims.forEach(prelim => {
+            prelim.parent = game;
+            assignParentGames(prelim);
+        });
+    }
+    return game;
 }

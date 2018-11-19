@@ -1,41 +1,41 @@
 import { ITBAPlayer, IPlayer, IGame, IRecord, BracketItem } from "./types";
 import { Game } from "./game";
 import { Player, TBAPlayer } from "./player";
-import { createBracket, addByes, createGame } from "./setup";
-import { getNumberOfGames, getNumberOfRounds } from "./utilities";
-import { renderGame, selectAllGameElements } from "./render";
+import { createBracket, addByes, createGame, flattenGames, sortByRound, assignParentGames } from "./setup";
+import { getNumberOfGames } from "./utilities";
+import { renderGame } from "./render";
 import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input';
+import { createPlayers } from "./mock-players";
+import { createRoundContainers, getNumberOfRounds } from "./rounds";
 
 // just make some players
+export const allGames = [];
 
 window.addEventListener('StartTournament', () => {
     // const players = inputPlayers.map(({ name, seed }) => {
     //     return new Player(name, seed);
     // });
 
-    const players = [];
+    const players = createPlayers(32);
 
     // create tourney structure
-    const completeArr = addByes(players) as IPlayer[];
-    const numberOfGames = getNumberOfGames(completeArr.length);
-    let currentGameId = numberOfGames; // decrement as games are assigned their ids
-
-    for (let i = 0; i < 62; i++) {
-        players.push(new Player('player-' + i.toString(), i));
-    }
-
+    // const numberOfGames = getNumberOfGames(players.length);
+    // let currentGameId = numberOfGames; // decrement as games are assigned their ids
+    const numberOfRounds = getNumberOfRounds(players.length);
     const baseBracket = createBracket(players);
-    console.log({ baseBracket });
-    const tourney = createGame(baseBracket, getNumberOfRounds(players.length)); // recursively creates all games
-
-    console.log({ tourney });
+    const tourney = createGame(baseBracket, numberOfRounds); // recursively creates all games
 
     const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
+
+    createRoundContainers(tourneyElt, numberOfRounds);
+
     renderGame(tourney, tourneyElt);
+    const flat = [];
+    const withParents = assignParentGames(tourney);
+    console.log(flattenGames(withParents, flat));
+    // console.log(sortByRound(flat));
 });
 
 window.dispatchEvent(new CustomEvent('StartTournament'));
-
-// console.log(selectAllGameElements());
 
 // handlePlayerInput();

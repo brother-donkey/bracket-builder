@@ -21,6 +21,7 @@ export class Game implements IGame {
     loser: IPlayer | null;
     prelims: any[];
     round: number;
+    parent: IGame | null;
 
     declareWinner = (winner: IPlayer, score: [number, number]) => {
         this.winner = winner;

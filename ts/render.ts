@@ -2,8 +2,7 @@ import { IGame } from "./types";
 
 export function renderGame(game: IGame, container: HTMLElement) {
     const gameElt = document.createElement('article');
-    const readyToPlay = gameReadyToPlay(game);
-    //data-game-id="${game.id}" ${readyToPlay ? '' : 'hidden'}
+
     gameElt.insertAdjacentHTML('afterbegin', `
     <div class="game round-${game.round}">
         <div class="game-name">${game.id}</div>
@@ -23,10 +22,14 @@ export function renderGame(game: IGame, container: HTMLElement) {
     });
 }
 
-export function selectAllGameElements(): HTMLElement[] {
-    return Array.from(document.querySelectorAll('[data-game-id]')) as HTMLElement[];
-}
 
-export function gameReadyToPlay(game: IGame) {
-    return game.player1.name !== 'TBD' || game.player2.name !== 'TBD';
-}
+
+
+
+// export function selectAllGameElements(): HTMLElement[] {
+//     return Array.from(document.querySelectorAll('[data-game-id]')) as HTMLElement[];
+// }
+
+// export function gameReadyToPlay(game: IGame) {
+//     return game.player1.name !== 'TBD' || game.player2.name !== 'TBD';
+// }
