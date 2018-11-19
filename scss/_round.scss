@@ -1,0 +1,34 @@
+.round {
+    flex: 1 1 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: .5rem;
+
+    &:nth-child(odd) {
+        // background-color: gainsboro;
+    }
+}
+
+[data-round-number="1"] {
+    font-size: 14px;
+}
+
+
+[data-round-number="2"] {
+    font-size: 16px;
+}
+
+[data-round-number="3"] {
+    font-size: 18px;
+}
+
+[data-round-number="4"] {
+    font-size: 20px;
+}
+
+[data-round-number="5"] {
+    font-size: 20px;
+}

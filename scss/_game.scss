@@ -1,0 +1,82 @@
+$game-button-color: slateblue;
+$game-chevron-color: white;
+$player-lower-seed-background-color: slateblue;
+$player-higher-seed-background-color: blueviolet;
+$player-seed-text-color: white;
+
+.game {
+    // border: 1px solid slateblue;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-grow: 1;
+    width: calc(100% - 20px);
+    margin-top: .5rem;
+    background: white;   
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+    &:hover,
+    &.is-active {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .finish-game {
+        position: absolute;
+        padding: 0;
+        top: 0;
+        bottom: 0;
+        left: calc(100% - 5px);
+        z-index: 0;
+        width: 35px;
+        background: $game-button-color;
+        // height: 100%;
+        appearance: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.chevron {
+    display: block;
+    border-left: 2px solid $game-chevron-color;
+    border-bottom: 2px solid $game-chevron-color;
+    transform: translate(5px) rotate(225deg);
+    width: 15px;
+    height: 15px;
+}
+
+.player {
+    display: flex;
+    height: 50%;
+    width: 100%;
+    border-bottom: 1px solid slateblue;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.player-name {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    padding: .5rem;
+}
+
+.seed {
+    display: inline-block;
+    text-align: center;
+    min-width: 24px;
+    color: $player-seed-text-color;
+    height: 100%;
+    padding: .5rem;
+
+    &.is-higher {
+        background-color: $player-higher-seed-background-color
+    }
+    &.is-lower {
+        background-color: $player-lower-seed-background-color;
+    }
+}

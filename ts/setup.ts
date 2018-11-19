@@ -72,7 +72,7 @@ export function addByes(arr: IPlayer[]) {
     // determine if divisible by 4
     if (remainder !== 0) {
         for (let i = 0; i < remainder; i++) {
-            arr.push(new Player(`Bye ${i}`, 16)); // push in some meaningless items to give top seeds a by
+            arr.push(new Player(`Bye ${i}`, 0)); // push in some meaningless items to give top seeds a by
         }
     }
     return arr;
@@ -91,11 +91,11 @@ export function flattenGames(game: IGame, arr: IGame[]): IGame[] {
 }
 
 export function sortByRound(gameArray: IGame[]) {
-    gameArray.sort((a, b) => {
+    return gameArray.sort((a, b) => {
         if (a.round > b.round) {
-            return -1;
-        } else {
             return 1;
+        } else {
+            return -1;
         }
     })
 }
@@ -108,4 +108,23 @@ export function assignParentGames(game: IGame): IGame {
         });
     }
     return game;
+}
+
+export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTMLElement) {
+    const sortedGames = sortByRound(games);
+
+    sortedGames.forEach(game => {
+        const container = document.querySelector(`[data-round-number="${game.round}"]`);
+        container.insertAdjacentHTML('beforeend', `
+        <article id="game-${game.id}" class="game box-shadow-1">
+            <div class="player" data-player-name="${game.player1.name}">
+                <span class="seed is-higher">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>
+            </div>
+            <div class="player" data-player-name="${game.player2.name}">
+                <span class="seed is-lower">${game.player2.seed || ''}</span><span class="player-name">${game.player2.name}</span>
+            </div>
+            <button class="finish-game" data-game-id="${game.id}"><span class="chevron" aria-hidden="true"></span></button>
+        </article>
+        `);
+    });
 }
