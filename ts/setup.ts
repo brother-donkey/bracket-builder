@@ -58,7 +58,7 @@ export function createGame(bracket: BracketItem, round: number): IGame {
     return new Game(
         new TBAPlayer(),
         new TBAPlayer,
-        [createGame((bracket[0] as any), previousRound), createGame((bracket[1] as any), previousRound],
+        [createGame((bracket[0] as any), previousRound), createGame((bracket[1] as any), previousRound)],
         gameId += 1,
         round
     );
