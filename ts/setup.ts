@@ -1,6 +1,7 @@
 import { IPlayer, BracketItem, IGame } from "./types";
 import { Player, TBAPlayer } from "./player";
 import { Game } from "./game";
+import { gameReadyToPlay } from "./render";
 
 export let gameId: number = 0;
 
@@ -114,16 +115,18 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
     const sortedGames = sortByRound(games);
 
     sortedGames.forEach(game => {
+        const ready = gameReadyToPlay(game);
+        const readyClass = ready ? 'ready' : '';
         const container = document.querySelector(`[data-round-number="${game.round}"]`);
         container.insertAdjacentHTML('beforeend', `
-        <article id="game-${game.id}" class="game box-shadow-1">
+        <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}">
             <div class="player" data-player-name="${game.player1.name}">
                 <span class="seed is-higher">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>
             </div>
             <div class="player" data-player-name="${game.player2.name}">
                 <span class="seed is-lower">${game.player2.seed || ''}</span><span class="player-name">${game.player2.name}</span>
             </div>
-            <button class="finish-game" data-game-id="${game.id}"><span class="chevron" aria-hidden="true"></span></button>
+            <button aria-label="finish the game between ${game.player1.name} and ${game.player2.name}" class="finish-game" data-game-id="${game.id}"><span class="chevron" aria-hidden="true"></span></button>
         </article>
         `);
     });

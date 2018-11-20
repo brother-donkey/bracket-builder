@@ -6,10 +6,6 @@
     align-items: center;
     justify-content: center;
     margin: .5rem;
-
-    &:nth-child(odd) {
-        // background-color: gainsboro;
-    }
 }
 
 [data-round-number="1"] {

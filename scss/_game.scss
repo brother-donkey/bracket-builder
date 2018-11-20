@@ -1,8 +1,11 @@
-$game-button-color: slateblue;
-$game-chevron-color: white;
-$player-lower-seed-background-color: slateblue;
-$player-higher-seed-background-color: blueviolet;
-$player-seed-text-color: white;
+$game-button-color: $blue;
+$game-chevron-color: $white;
+$player-lower-seed-background-color: $blue;
+$player-higher-seed-background-color: $blue;
+$player-seed-text-color: $white;
+$game-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+$game-box-shadow-hover: 0 14px 28px rgba(0,0,0,0.25), 0 -10px 28px rgba(0,0,0,0.22);
+$game-border-radius: 0 20px 20px 0;
 
 .game {
     // border: 1px solid slateblue;
@@ -10,15 +13,23 @@ $player-seed-text-color: white;
     flex-direction: column;
     position: relative;
     flex-grow: 1;
-    width: calc(100% - 20px);
+    width: 100%;
+    padding-right: 20px;
+    
     margin-top: .5rem;
     background: white;   
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: $game-box-shadow;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: $game-border-radius;
 
     &:hover,
     &.is-active {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        z-index: 2;
+        box-shadow: $game-box-shadow-hover;
+    }
+
+    &:not(.ready) {
+        opacity: .5;
     }
 
     .finish-game {
@@ -26,14 +37,18 @@ $player-seed-text-color: white;
         padding: 0;
         top: 0;
         bottom: 0;
-        left: calc(100% - 5px);
+        right: 0;
         z-index: 0;
         width: 35px;
         background: $game-button-color;
-        // height: 100%;
         appearance: none;
         border: none;
         cursor: pointer;
+        border-radius: $game-border-radius;
+
+        // &:hover {
+            
+        // }
     }
 }
 
@@ -50,11 +65,14 @@ $player-seed-text-color: white;
     display: flex;
     height: 50%;
     width: 100%;
-    border-bottom: 1px solid slateblue;
+    padding: .25rem;
     flex-grow: 1;
     justify-content: center;
     align-items: center;
 
+    &:first-child {
+        border-bottom: 1px solid $game-button-color;
+    }
 }
 
 .player-name {
@@ -68,10 +86,12 @@ $player-seed-text-color: white;
 .seed {
     display: inline-block;
     text-align: center;
-    min-width: 15%;
     color: $player-seed-text-color;
-    height: 100%;
-    padding: .5rem;
+    padding: .25rem;
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
 
     &.is-higher {
         background-color: $player-higher-seed-background-color
