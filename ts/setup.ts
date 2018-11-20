@@ -131,3 +131,6 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
         `);
     });
 }
+
+// add  <i class="fas fa-star"></i> to winning .player-name
+// add <i class="fas fa-skull"></i> to losing .player-name

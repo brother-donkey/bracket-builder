@@ -22,13 +22,9 @@ export function renderGame(game: IGame, container: HTMLElement) {
     });
 }
 
-
-
-
-
 // export function selectAllGameElements(): HTMLElement[] {
 //     return Array.from(document.querySelectorAll('[data-game-id]')) as HTMLElement[];
-}
+// }
 
 export function gameReadyToPlay(game: IGame) {
     return game.player1.name !== 'TBD' || game.player2.name !== 'TBD';

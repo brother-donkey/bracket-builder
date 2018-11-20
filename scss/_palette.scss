@@ -6,4 +6,19 @@ $red: rgba(225, 85, 84, 1);
 $blue: rgba(53, 167, 255, 1);
 $white: white;
 
-$colors: $black, $grey, $green, $red, $blue;
+$colors: 
+ ('black', $black),
+ ('grey', $grey),
+ ('green', $green),
+ ('red', $red),
+ ('blue', $blue);
+
+ @each $name, $color in $colors {
+     .has-#{$name}-background {
+         background-color: $color;
+     }
+
+     .has-#{$name}-text {
+         color: $color;
+     }
+ }
