@@ -120,7 +120,7 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
         const readyClass = ready ? 'ready' : '';
         const container = document.querySelector(`[data-round-number="${game.round}"]`);
         container.insertAdjacentHTML('beforeend', `
-        <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}">
+        <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}" data-game-id="${game.id}">
             <div class="player" data-player-name="${game.player1.name}">
                 <span class="seed is-higher">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>
             </div>
@@ -133,5 +133,11 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
     });
 }
 
-// add  <i class="fas fa-star"></i> to winning .player-name
-// add <i class="fas fa-skull"></i> to losing .player-name
+export function addResultIcon(element: HTMLElement, winner: boolean) {
+    // add to winning .player-name
+
+    element.insertAdjacentHTML('beforeend', `
+        <i class="fas ${winner ? 'fa-star' : 'fa-skull'}"></i> 
+    `);
+    return element;
+}

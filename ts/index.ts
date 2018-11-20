@@ -32,10 +32,9 @@ window.addEventListener('StartTournament', () => {
     const withParents = assignParentGames(tourney);
     const games = flattenGames(withParents, flat);
     renderGamesInRoundContainers(games, tourneyElt);
+    setUpGameFinishedEvent(games);
 });
 
 window.dispatchEvent(new CustomEvent('StartTournament'));
 
 // handlePlayerInput();
-
-setUpGameFinishedEvent();

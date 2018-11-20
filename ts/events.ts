@@ -1,9 +1,13 @@
-export function setUpGameFinishedEvent() {
+import { IGame } from "./types";
+
+export function setUpGameFinishedEvent(games: IGame[]) {
     window.addEventListener('click', e => {
         const target = e.target as HTMLElement;
-        const game = target.closest('.game');
-        if (game && game.classList.contains('ready')) {
-            console.log(game);
+        const gameElt = target.closest('.game') as HTMLElement;
+        if (gameElt && gameElt.classList.contains('ready')) {
+            const [match] = games.filter(game => game.id.toString() === gameElt.dataset.gameId);
         }
     });
 }
+
+// 
