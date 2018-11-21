@@ -8,6 +8,7 @@ import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input
 import { createPlayers } from "./mock-players";
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { setUpGameFinishedEvent } from "./events";
+import { setUpExitButtons } from "./exit-button";
 
 window.addEventListener('StartTournament', () => {
     // const players = inputPlayers.map(({ name, seed }) => {
@@ -36,5 +37,7 @@ window.addEventListener('StartTournament', () => {
 });
 
 window.dispatchEvent(new CustomEvent('StartTournament'));
+
+setUpExitButtons();
 
 // handlePlayerInput();

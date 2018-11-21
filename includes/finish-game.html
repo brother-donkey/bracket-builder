@@ -1,7 +1,10 @@
-<div class="form-container">
+<div class="form-container has-exit">
     <form id="submit-game" action="POST">
         <header class="submit-game-info">
-            Info
+            <div class="submit-game-info-game">
+                <h2>Game Info</h2>
+            </div>
+            <button type="button" class="exit fas fa-times-circle" aria-label="exit game scoring"></button>
         </header>
         <div class="fieldset">
             <label for="first-player-score">Player 1 Has a reall long tname really long</label>
@@ -11,6 +14,6 @@
             <label for="second-player-score">Player 2</label>
             <input id="second-player-score" type="number" placeholder="Score" data-player-id="">
         </div>
-        <button type="button">Finish Game</button>
+        <button class="submit-game-button" type="button">Finish Game</button>
     </form>
 </div>
