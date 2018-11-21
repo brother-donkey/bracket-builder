@@ -9,6 +9,7 @@ import { createPlayers } from "./mock-players";
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { setUpGameFinishedEvent } from "./events";
 import { setUpExitButtons } from "./exit-button";
+import { setUpFinshGameButtons } from "./finish-game";
 
 window.addEventListener('StartTournament', () => {
     // const players = inputPlayers.map(({ name, seed }) => {

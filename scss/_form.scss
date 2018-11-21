@@ -8,7 +8,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
+    z-index: 3;
     background: transparentize($grey, .2);
     max-width: 100%;
 }
@@ -56,7 +56,7 @@
         background: $blue;
         border-radius: 20px 20px 0 0;
         padding: 10px;
-        z-index: 4;
+        z-index: 5;
         box-shadow: $box-shadow;
         display: flex;
   
@@ -96,7 +96,7 @@
         flex-direction: column;
         padding: 10px;
         box-shadow: $box-shadow;
-        z-index: 3;
+        z-index: 4;
         flex-grow: 1;
 
         &:first-of-type {
