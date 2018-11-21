@@ -14,6 +14,10 @@ export function createRoundContainers(container: HTMLElement, numberOfRounds: nu
         const section = document.createElement('section');
         section.dataset.roundNumber = `${i + 1}`;
         section.classList.add('round');
+        const sectionHeader = document.createElement('header');
+        sectionHeader.classList.add('round-label');
+        sectionHeader.textContent = `Round ${i + 1}`
+        section.appendChild(sectionHeader);
         rounds.push(section);
         container.appendChild(section);
     }

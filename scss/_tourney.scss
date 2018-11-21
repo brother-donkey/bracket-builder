@@ -2,6 +2,10 @@
     width: 100vw;
     min-height: 100vh;
     border: 3px solid slateblue;
-    padding: .5rem;
+    padding: 2.5rem .5rem .5rem;
     display: flex;
+
+    @media screen and (max-width: 766px) {
+        display: block;
+    }
 }

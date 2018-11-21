@@ -6,6 +6,17 @@
     align-items: center;
     justify-content: center;
     margin: .5rem;
+    padding-top: 1.5rem;
+    // position: relative;
+
+    header.round-label {
+        // position: absolute;
+        // top: 0; 
+        // right: 0;
+        // left: 0;
+        // height: 1.5rem;
+        color: $white;
+    }
 }
 
 [data-round-number="1"] {
