@@ -121,10 +121,10 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
         const container = document.querySelector(`[data-round-number="${game.round}"]`);
         container.insertAdjacentHTML('beforeend', `
         <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}" data-game-id="${game.id}">
-            <div class="player" data-player-name="${game.player1.name}">
+            <div class="player" data-player-name="${game.player1.name}" data-player-by="${playerIsBy(game.player1)}">
                 <span class="seed is-higher">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>
             </div>
-            <div class="player" data-player-name="${game.player2.name}">
+            <div class="player" data-player-name="${game.player2.name}" data-player-by="${playerIsBy(game.player2)}">
                 <span class="seed is-lower">${game.player2.seed || ''}</span><span class="player-name">${game.player2.name}</span>
             </div>
             <button aria-label="finish the game between ${game.player1.name} and ${game.player2.name}" class="finish-game" data-game-id="${game.id}"><span class="chevron" aria-hidden="true"></span></button>
@@ -140,4 +140,8 @@ export function addResultIcon(element: HTMLElement, winner: boolean) {
         <i class="fas ${winner ? 'fa-star' : 'fa-skull'}"></i> 
     `);
     return element;
+}
+
+export function playerIsBy(player: IPlayer): boolean {
+    return player.name.indexOf('By ') !== -1 ? true : false;
 }
