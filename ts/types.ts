@@ -21,7 +21,7 @@ export interface IGame {
     id: number;
     player1: IPlayer;
     player2: IPlayer; ç
-    declareWinner: (player: IPlayer, score: [number, number]) => [IPlayer, [number, number]];
+    declareWinner: (player: IPlayer, score: [number, number]) => IPlayer;
     winner: IPlayer | null;
     loser: IPlayer | null;
     finished: boolean;

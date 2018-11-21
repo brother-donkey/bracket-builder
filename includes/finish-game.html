@@ -1,9 +1,16 @@
 <div class="form-container">
     <form id="submit-game" action="POST">
-        <label for="first-player-score">Player 1</label>
-        <input id="first-player-score" type="number" placeholder="Score" data-player-id="">
-        <label for="secondy-player-score">Player 2</label>
-        <input id="second-player-score" type="number" placeholder="Score" data-player-id="">
-        <button type="button">Declare Winner</button>
+        <header class="submit-game-info">
+            Info
+        </header>
+        <fieldset>
+            <label for="first-player-score">Player 1</label>
+            <input id="first-player-score" type="number" placeholder="Score" data-player-id="">
+        </fieldset>
+        <fieldset>
+            <label for="secondy-player-score">Player 2</label>
+            <input id="second-player-score" type="number" placeholder="Score" data-player-id="">
+        </fieldset>
+        <button type="button">Finish Game</button>
     </form>
 </div>

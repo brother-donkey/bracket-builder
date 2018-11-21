@@ -1,0 +1,68 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background: transparentize($grey, .2);
+}
+
+#submit-game {
+    display: flex;
+    position: relative;
+    width: 30rem;
+    height: 15rem;
+    background: $white;
+    border-radius: 20px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 3rem 0;
+
+    button {
+        display: block;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 3rem;
+        border-radius: 0 0 20px 20px;
+        appearance: none;
+        border: none;
+        font-size: 1.2rem;
+        background: $green;
+        color: $white;
+        cursor: pointer;
+
+        &:hover {
+            background: darken($green, 10%);
+        }
+    }
+
+    .submit-game-info {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 3rem;
+        background: $blue;
+        border-radius: 20px 20px 0 0;
+        padding: 10px;
+    }
+
+    fieldset {
+        height: 100%;
+        width: 50%;
+        border: none;
+        display: flex;
+
+        &:first-of-type {
+            border-right: 1px solid $blue;
+        }
+    }
+}

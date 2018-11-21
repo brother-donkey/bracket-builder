@@ -37,6 +37,6 @@ export class Game implements IGame {
         this.loser.record.playersLostTo.push(this.winner.name);
         this.loser.record.pointDifferential -= pointDifference;
 
-        return [this.winner, score];
+        return this.winner;
     }
 }
