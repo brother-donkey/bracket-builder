@@ -42,6 +42,8 @@ export function setUpWinnerDeclaredEvent() {
         winnerElt.classList.remove('loser');
         winnerElt.classList.add('winner');
         addResultIcon(winnerElt, true);
+        loserElt.classList.remove('winner');
+        loserElt.classList.add('loser');
         addResultIcon(loserElt, false);
     });
 }
