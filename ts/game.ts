@@ -47,10 +47,11 @@ export class Game implements IGame {
         this.loser.record.playersLostTo.push(this.winner.name);
         this.loser.record.pointDifferential -= pointDifference;
 
-        window.dispatchEvent(new CustomEvent('WinnerDeclaredEvent', {
+        const winnerDeclaredEvent = new CustomEvent('WinnerDeclaredEvent', {
             "detail": this
-        }));
+        });
 
+        window.dispatchEvent(winnerDeclaredEvent);
         return this.winner;
     }
 }

@@ -7,7 +7,7 @@ import { renderGame } from "./render";
 import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input';
 import { createPlayers } from "./mock-players";
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
-import { setUpGameFinishedEvent } from "./events";
+import { setUpGameFinishedEvent, setupWinnerDeclaredEvent } from "./events";
 import { setUpExitButtons } from "./exit-button";
 import { setUpFinshGameButtons } from "./finish-game";
 
@@ -35,6 +35,7 @@ window.addEventListener('StartTournament', () => {
     const games = flattenGames(withParents, flat);
     renderGamesInRoundContainers(games, tourneyElt);
     setUpGameFinishedEvent(games);
+    setupWinnerDeclaredEvent(games);
 });
 
 window.dispatchEvent(new CustomEvent('StartTournament'));
