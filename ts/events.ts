@@ -49,7 +49,7 @@ export function setUpWinnerDeclaredEventListener() {
 }
 
 export function findGameElement(id: number): HTMLElement {
-    return document.querySelector(`[data-game-id="${id}"]`);
+    return document.querySelector(`.game[data-game-id="${id}"]`);
 }
 
 export function findPlayerElement(container: HTMLElement, player: IPlayer): HTMLElement {
