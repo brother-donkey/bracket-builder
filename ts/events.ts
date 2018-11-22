@@ -38,13 +38,23 @@ export function setUpWinnerDeclaredEventListener() {
         const winnerElt = findPlayerElement(elt, winner);
         const loserElt = findPlayerElement(elt, loser);
 
-        finishGameButton.innerHTML = `<span>${score.winningScore} - ${score.losingScore}</span>`;
         winnerElt.classList.remove('loser');
         winnerElt.classList.add('winner');
         addResultIcon(winnerElt, true);
         loserElt.classList.remove('winner');
         loserElt.classList.add('loser');
         addResultIcon(loserElt, false);
+
+        const determineWhichIsFirstInDom = elt.querySelector('.winner + .loser');
+        const winnerIsFirst = determineWhichIsFirstInDom !== null;
+
+        const buttonScoreHTML = `
+            ${winnerIsFirst ? `<div class="scored-winner"><span>${score.winningScore}</span></div>` : `<div class="scored-loser"><span>${score.losingScore}</span></div>`}
+            ${winnerIsFirst ? `<div class="scored-loser"><span>${score.losingScore}</span></div>` : `<div class="scored-winner"><span>${score.winningScore}</span></div>`}
+        `
+
+        finishGameButton.innerHTML = buttonScoreHTML;
+        finishGameButton.classList.add('scored');
     });
 }
 
@@ -77,10 +87,12 @@ export function setupWinnerDeclaredEvent(games: IGame[]) {
 
             if (firstPlayerScore === secondPlayerScore) {
                 alert("Scores can't be the same. We don't do ties.");
+                return;
             }
 
             if (!firstPlayerScore || !secondPlayerScore) {
                 alert("You didn't fill out one of the scores.");
+                return;
             }
 
             const gameInfo = document.querySelector('#submit-game-info') as HTMLElement;
