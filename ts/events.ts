@@ -1,4 +1,5 @@
 import { IGame, IPlayer } from "./types";
+import { addResultIcon } from "./setup";
 
 export function setUpGameFinishedEvent(games: IGame[]) {
     window.addEventListener('click', e => {
@@ -40,8 +41,8 @@ export function setUpWinnerDeclaredEvent() {
         finishGameButton.innerHTML = `<span>${score.winningScore} - ${score.losingScore}</span>`;
         winnerElt.classList.remove('loser');
         winnerElt.classList.add('winner');
-        loserElt.classList.remove('winner');
-        loserElt.classList.add('loser');
+        addResultIcon(winnerElt, true);
+        addResultIcon(loserElt, false);
     });
 }
 
