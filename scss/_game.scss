@@ -47,6 +47,7 @@ $border-radius-left-side: 0 20px 20px 0;
     border: none;
     cursor: pointer;
     border-radius: $border-radius-left-side;
+    display: flex;
 
     .game.ready:hover & {
         background: $green;
@@ -62,29 +63,40 @@ $border-radius-left-side: 0 20px 20px 0;
 
     &.scored {
         display: flex;
-        color: $white;
         flex-direction: column;
+        color: $white;
+        flex-wrap: wrap;
         z-index: 2;
 
         .scored-loser,
         .scored-winner {
-            width: 100%;
-            flex: 1 0 50%;
+            width: 36px;
+            flex: 1 1 auto;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
 
             &:first-child {
+                border-radius: 0 20px 0 0;
                 border-bottom: 1px solid $blue;
+            }
+
+            &:nth-child(2) {
+                border-radius: 0 0 20px 0;
+            }
+
+            > span {
+                display: block;
+                flex-grow: 1;
             }
         }
 
         .scored-winner {
+            border-left: 3px solid $red;
             background: $blue;
         }
 
         .scored-loser {
+            border-left: 3px solid $blue;
             background: $red;
         }
 
