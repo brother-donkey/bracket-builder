@@ -1,4 +1,4 @@
-import { IGame } from "./types";
+import { IGame, IPlayer } from "./types";
 
 export function setUpGameFinishedEvent(games: IGame[]) {
     window.addEventListener('click', e => {
@@ -26,4 +26,29 @@ export function setUpGameFinishedEvent(games: IGame[]) {
             console.log(match.parent);
         }
     });
+}
+
+export function setUpWinnerDeclaredEvent() {
+    window.addEventListener('WinnerDeclaredEvent', (e: CustomEvent) => {
+        const { detail } = e;
+        const { id, winner, loser, score } = detail as IGame;
+        const elt = findGameElement(id);
+        const finishGameButton = elt.querySelector('.finish-game');
+        const winnerElt = findPlayerElement(elt, winner);
+        const loserElt = findPlayerElement(elt, loser);
+
+        finishGameButton.innerHTML = `<span>${score.winningScore} - ${score.losingScore}</span>`;
+        winnerElt.classList.remove('loser');
+        winnerElt.classList.add('winner');
+        loserElt.classList.remove('winner');
+        loserElt.classList.add('loser');
+    });
+}
+
+export function findGameElement(id: number): HTMLElement {
+    return document.querySelector(`[data-game-id="${id}"]`);
+}
+
+export function findPlayerElement(container: HTMLElement, player: IPlayer): HTMLElement {
+    return container.querySelector(`[data-player-name="${player.name}"]`);
 }

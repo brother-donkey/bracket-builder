@@ -1,4 +1,4 @@
-import { IPlayer, IGame } from "./types";
+import { IPlayer, IGame, IFinalScore } from "./types";
 
 export class Game implements IGame {
     constructor(player1: IPlayer, player2: IPlayer, prelims: any[], id: number, round: number) {
@@ -22,8 +22,18 @@ export class Game implements IGame {
     prelims: any[];
     round: number;
     parent: IGame | null;
+    score: IFinalScore | null;
 
     declareWinner = (winner: IPlayer, score: [number, number]) => {
+
+
+        const winningScore = score[0] > score[1] ? score[0] : score[1];
+        const losingScore = score[0] > score[1] ? score[1] : score[0];
+        this.score = {
+            winningScore,
+            losingScore
+        };
+
         this.winner = winner;
         this.loser = this.winner === this.player1 ? this.player2 : this.player1;
 
@@ -36,6 +46,10 @@ export class Game implements IGame {
         this.loser.record.losses++;
         this.loser.record.playersLostTo.push(this.winner.name);
         this.loser.record.pointDifferential -= pointDifference;
+
+        window.dispatchEvent(new CustomEvent('WinnerDeclaredEvent', {
+            "detail": this
+        }));
 
         return this.winner;
     }

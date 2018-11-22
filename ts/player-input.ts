@@ -9,7 +9,7 @@ export const tournamentRoster = document.getElementById('tournament-roster') as 
 
 playerInputForm.addEventListener('submit', e => {
     e.preventDefault();
-    window.dispatchEvent(new CustomEvent('starttournament'));
+    window.dispatchEvent(new CustomEvent('StartTournament'));
 })
 
 export function handlePlayerInput() {

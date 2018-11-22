@@ -28,6 +28,7 @@ export interface IGame {
     prelims: any[];
     round: number;
     parent?: IGame | null;
+    score: IFinalScore | null;
 }
 
 export interface IRecord {
@@ -40,3 +41,8 @@ export interface IRecord {
 
 export type PlayerTuple = Array<IPlayer>;
 export type BracketItem = Array<PlayerTuple> | PlayerTuple;
+
+export interface IFinalScore {
+    winningScore: number;
+    losingScore: number;
+}
