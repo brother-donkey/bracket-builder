@@ -163,8 +163,9 @@ export function setUpFocusTracker() {
             }
 
             const clickedElement = target.classList.contains('finish-game') ? target : target.closest('.finish-game') as HTMLElement;
-            clickedElement.dataset.lastFocusedGame = "true";
-            debugger;
+            if (clickedElement) {
+                clickedElement.dataset.lastFocusedGame = "true";
+            }
         }
     })
 }

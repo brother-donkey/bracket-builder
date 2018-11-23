@@ -24,7 +24,6 @@ export function handlePlayerInput() {
         const playerField = target.parentElement.parentElement;
         const playerName = playerField.querySelector('input.name') as HTMLInputElement;
         const playerSeed = playerField.querySelector('input.seed') as HTMLInputElement;
-        // console.log(playerField, playerName, playerSeed);
         if (playerName.value !== '' && playerName.value !== undefined && playerName.value !== null) {
             inputPlayers.push({
                 name: playerName.value,
@@ -34,7 +33,6 @@ export function handlePlayerInput() {
             playerName.placeholder = `Next player's name`;
             playerSeed.value = '0';
         } else {
-            console.log('fuck');
             playerName.value = '';
             playerName.placeholder = `Enter a name!`;
         }
