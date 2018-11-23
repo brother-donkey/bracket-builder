@@ -51,6 +51,13 @@ export class Game implements IGame {
             "detail": this
         });
 
+        console.log(this.parent.prelims, this.parent.prelims[0].id, this.parent.prelims[1].id);
+        if (this.parent.prelims[0].id === this.id) {
+            this.parent.player1 = winner;
+        } else if (this.parent.prelims[1].id === this.id) {
+            this.parent.player2 = winner;
+        }
+
         window.dispatchEvent(winnerDeclaredEvent);
         return this.winner;
     }
