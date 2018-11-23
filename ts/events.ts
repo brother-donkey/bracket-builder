@@ -29,10 +29,10 @@ export function setUpGameFinishedEvent(games: IGame[]) {
     });
 }
 
-export function setUpWinnerDeclaredEventListener() {
+export function setUpWinnerDeclaredEventListener(games) {
     window.addEventListener('WinnerDeclaredEvent', (e: CustomEvent) => {
-        const { detail } = e;
-        const { id, winner, loser, score } = detail as IGame;
+        const { detail: finishedGame } = e;
+        const { id, winner, loser, score, parent } = finishedGame as IGame;
         const elt = findGameElement(id);
         const finishGameButton = elt.querySelector('.finish-game');
         const winnerElt = findPlayerElement(elt, winner);
@@ -55,6 +55,8 @@ export function setUpWinnerDeclaredEventListener() {
 
         finishGameButton.innerHTML = buttonScoreHTML;
         finishGameButton.classList.add('scored');
+
+        populateParentGame(finishedGame, parent);
     });
 }
 
@@ -65,6 +67,8 @@ export function findGameElement(id: number): HTMLElement {
 export function findPlayerElement(container: HTMLElement, player: IPlayer): HTMLElement {
     return container.querySelector(`[data-player-name="${player.name}"]`);
 }
+
+// deals with how form submission of a score
 
 export function setupWinnerDeclaredEvent(games: IGame[]) {
     window.addEventListener('click', (e) => {
@@ -103,6 +107,44 @@ export function setupWinnerDeclaredEvent(games: IGame[]) {
             const winner = match.player1.name === winnersName ? match.player1 : match.player2;
 
             match.declareWinner(winner, [firstPlayerScore, secondPlayerScore]);
+
+            const formContainer = document.querySelector('.form-container') as HTMLElement;
+            formContainer.hidden = true;
         }
     });
+}
+
+export function isTopPlayerInGame(finishedGame: IGame, nextGame: IGame): boolean {
+    return nextGame.prelims[0].id === finishedGame.id;
+}
+
+export function populateParentGame(finishedGame: IGame, nextGame: IGame) {
+    const isTop = isTopPlayerInGame(finishedGame, nextGame);
+    const nextGameElt = document.querySelector(`#game-${nextGame.id}`) as HTMLElement;
+    const players = Array.from(nextGameElt.querySelectorAll(`.player`)) as HTMLElement[];
+    const index = isTop ? 1 : 0;
+    const player = players[index];
+    const seed = player.querySelector(`.seed`);
+    const playerName = player.querySelector('.player-name');
+
+    playerName.textContent = finishedGame.winner.name;
+    seed.textContent = finishedGame.winner.seed.toString();
+    player.dataset.playerName = finishedGame.winner.name;
+
+    if (gameElementIsReadyToPlay(nextGameElt, players, nextGame.id)) {
+        nextGameElt.classList.add('ready');
+    }
+}
+
+export function gameElementIsReadyToPlay(gameElt: HTMLElement, playerElts: HTMLElement[], id: number): boolean {
+    let isReady = true;
+
+    playerElts.forEach(elt => {
+        if (elt.querySelector('.player-name').textContent.indexOf('TBD') !== -1) {
+            console.log(elt.querySelector('.player-name').textContent);
+            isReady = false;
+        }
+    });
+
+    return isReady;
 }

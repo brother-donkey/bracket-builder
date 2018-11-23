@@ -27,7 +27,9 @@ $border-radius-left-side: 0 20px 20px 0;
     &.ready.is-active {
         z-index: 2;
         box-shadow: $box-shadow-hover;
-        transform: scale(1.1);
+        @media screen and (min-width: 767px) {
+            transform: scale(1.1);
+        }
     }
 
     &:not(.ready) {

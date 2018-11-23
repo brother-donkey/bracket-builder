@@ -9,7 +9,6 @@ import { createPlayers } from "./mock-players";
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { setUpGameFinishedEvent, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener } from "./events";
 import { setUpExitButtons } from "./exit-button";
-import { setUpFinshGameButtons } from "./finish-game";
 
 window.addEventListener('StartTournament', () => {
     // const players = inputPlayers.map(({ name, seed }) => {
@@ -36,7 +35,7 @@ window.addEventListener('StartTournament', () => {
     renderGamesInRoundContainers(games, tourneyElt);
     setUpGameFinishedEvent(games);
     setupWinnerDeclaredEvent(games);
-    setUpWinnerDeclaredEventListener();
+    setUpWinnerDeclaredEventListener(games);
 });
 
 window.dispatchEvent(new CustomEvent('StartTournament'));
