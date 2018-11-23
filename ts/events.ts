@@ -1,7 +1,7 @@
 import { IGame, IPlayer, IFinalScore } from "./types";
 import { addResultIcon } from "./setup";
 
-export function setUpGameFinishedEvent(games: IGame[]) {
+export function setUpGameFinishModalEvent(games: IGame[]) {
     window.addEventListener('click', e => {
         const target = e.target as HTMLElement;
         const gameElt = target.closest('.game') as HTMLElement;
@@ -25,6 +25,7 @@ export function setUpGameFinishedEvent(games: IGame[]) {
             secondPlayerName.textContent = match.player2.name;
             firstPlayerScore.value = undefined;
             secondPlayerScore.value = undefined;
+            firstPlayerScore.focus();
         }
     });
 }
@@ -110,6 +111,8 @@ export function setupWinnerDeclaredEvent(games: IGame[]) {
 
             const formContainer = document.querySelector('.form-container') as HTMLElement;
             formContainer.hidden = true;
+            const lastClickedGame = document.querySelector('[data-last-focused-game="true"]') as HTMLElement;
+            lastClickedGame.focus();
         }
     });
 }
@@ -147,4 +150,21 @@ export function gameElementIsReadyToPlay(gameElt: HTMLElement, playerElts: HTMLE
     });
 
     return isReady;
+}
+
+export function setUpFocusTracker() {
+    window.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+
+        if (target.classList.contains('finish-game') || target.closest('.finish-game')) {
+            const lastFocused = document.querySelector(`[data-last-focused-game="true"]`) as HTMLElement;
+            if (lastFocused) {
+                lastFocused.dataset.lastFocusedGame = "false";
+            }
+
+            const clickedElement = target.classList.contains('finish-game') ? target : target.closest('.finish-game') as HTMLElement;
+            clickedElement.dataset.lastFocusedGame = "true";
+            debugger;
+        }
+    })
 }
