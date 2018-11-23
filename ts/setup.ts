@@ -2,7 +2,6 @@ import { IPlayer, BracketItem, IGame } from "./types";
 import { Player, TBAPlayer } from "./player";
 import { Game } from "./game";
 import { gameReadyToPlay } from "./render";
-import { setUpGameFinishedEvent } from "./events";
 
 export let gameId: number = 0;
 
