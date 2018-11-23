@@ -113,6 +113,9 @@ export function setupWinnerDeclaredEvent(games: IGame[]) {
             formContainer.hidden = true;
             const lastClickedGame = document.querySelector('[data-last-focused-game="true"]') as HTMLElement;
             lastClickedGame.focus();
+
+            const gameContainer = document.getElementById(`game-${match.id}`) as HTMLElement;
+            gameContainer.classList.add('complete-game');
         }
     });
 }

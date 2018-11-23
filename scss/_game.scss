@@ -51,7 +51,7 @@ $border-radius-left-side: 0 20px 20px 0;
     border-radius: $border-radius-left-side;
     display: flex;
 
-    .game.ready:hover & {
+    .game:not(.complete-game).ready:hover & {
         background: $green;
 
         .complete & {
@@ -93,13 +93,13 @@ $border-radius-left-side: 0 20px 20px 0;
         }
 
         .scored-winner {
-            border-left: 3px solid $red;
+            border-left: 3px solid $white;
             background: $blue;
         }
 
         .scored-loser {
-            border-left: 3px solid $blue;
-            background: $red;
+            border-left: 3px solid $red;
+            color: $red;
         }
 
     }
@@ -133,8 +133,8 @@ $border-radius-left-side: 0 20px 20px 0;
     }
 
     &.loser {
-        background: $red;
-        color: $white;
+        background: $white !important;
+        color: $red;
     }
 }
 
@@ -169,7 +169,7 @@ $border-radius-left-side: 0 20px 20px 0;
     }
 
     .loser & {
-        background-color: $white;
-        color: $red;
+        background-color: $red;
+        color: $white;
     }
 }
