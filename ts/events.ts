@@ -144,7 +144,6 @@ export function gameElementIsReadyToPlay(gameElt: HTMLElement, playerElts: HTMLE
 
     playerElts.forEach(elt => {
         if (elt.querySelector('.player-name').textContent.indexOf('TBD') !== -1) {
-            console.log(elt.querySelector('.player-name').textContent);
             isReady = false;
         }
     });
