@@ -5,15 +5,15 @@ interface SimplePlayer {
 
 export const inputPlayers = [] as SimplePlayer[];
 export const playerInputForm = document.getElementById('player-input-form') as HTMLFormElement;
-export const tournamentRoster = document.getElementById('tournament-roster') as HTMLElement;
+export const tournamentRoster = document.getElementById('player-input-added-players') as HTMLElement;
 
 playerInputForm.addEventListener('submit', e => {
     e.preventDefault();
-    window.dispatchEvent(new CustomEvent('StartTournament'));
+    // window.dispatchEvent(new CustomEvent('StartTournament'));
 })
 
 export function handlePlayerInput() {
-    playerInputForm.insertAdjacentHTML('afterbegin', buildNewPlayerInput(1));
+    playerInputForm.hidden = false;
 
     window.addEventListener('click', e => {
         const target = e.target as HTMLElement;
@@ -21,6 +21,7 @@ export function handlePlayerInput() {
             return;
         }
 
+        const startButton = document.getElementById('start-tournament') as HTMLButtonElement;
         const playerField = target.parentElement.parentElement;
         const playerName = playerField.querySelector('input.name') as HTMLInputElement;
         const playerSeed = playerField.querySelector('input.seed') as HTMLInputElement;
@@ -37,31 +38,25 @@ export function handlePlayerInput() {
             playerName.placeholder = `Enter a name!`;
         }
 
+        if (inputPlayers.length >= 4) {
+            startButton.disabled = false;
+        }
+
         updateRoster(inputPlayers);
     });
 }
 
-export function buildNewPlayerInput(playerId: number) {
-    return `
-    <fieldset class="form-player-container">
-        <div class="form-player-input-container">
-            <input class="input name" type="text" name="size" placeholder="Name">
-        </div>
-        <div class="form-seed-container">
-            <input class="input seed" type="text" placeholder="Seed" name="size" value="0">
-        </div>
-        <div class="form-add-player-container">
-            <button class="button add-player" type="button">Add</button>
-        </div>
-    </fieldset>
-    `;
-}
 
 export function updateRoster(players: SimplePlayer[]) {
 
     const playerHTML = players.map(player => {
-        return `<p class="roster-player name">${player.name}</p><p class="roster-player seed">${player.seed}</p>`;
+
+        return `
+        <div class="player" data-player-name="player-1" data-player-by="false">
+            <span class="seed is-higher" >${isNaN(player.seed) || player.seed === 0 ? "?" : player.seed}</span><span class="player-name">${player.name}</span >
+        </div>`;
     }).join('');
 
-    tournamentRoster.innerHTML = `<div class="roster-label"> Player</div><div class="roster-label">Seed </div>${playerHTML}`
+    tournamentRoster.innerHTML = `${playerHTML}`
 }
+

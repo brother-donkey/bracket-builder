@@ -171,3 +171,19 @@ export function setUpFocusTracker() {
         }
     })
 }
+
+export function setupStartTournamentButtonClick() {
+    window.addEventListener('click', e => {
+
+        const text = document.getElementById('start-tourament-icon');
+        const background = document.getElementById('start-tournament-background');
+
+        if (text && background) {
+            text.classList.add('start-tournament-animation-icon');
+        }
+
+        if (background) {
+            background.classList.add('start-tournament-animation-background');
+        }
+    });
+}

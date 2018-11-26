@@ -1,0 +1,34 @@
+<section id="initial-section">
+
+    <form id="player-input-form" hidden>
+        <div id="player-input-directions">
+            <h2>Input tournament roster</h2>
+            <p>Add players to your tournament by writing their names and seeds in the inputs below. Seeds can be
+                omitted. You need at least four players to start a tournament. Select "Start Tournament" when all
+                players have been added.</p>
+        </div>
+        <div class="form-player-container">
+            <div class="form-player-input-container">
+                <input class="input name" type="text" name="size" placeholder="First player's name">
+            </div>
+            <div class="form-seed-container">
+                <input class="input seed" type="number" placeholder="Seed" name="size" value="0">
+            </div>
+            <div class="form-add-player-container">
+                <button class="button add-player" type="button">Add</button>
+            </div>
+        </div>
+        <div class="form-player-container">
+            <button id="start-tournament">Start Tournament</button>
+        </div>
+        <div id="player-input-added-players">
+
+        </div>
+
+    </form>
+</section>
+<div id="start-tourament-icon">
+    <p>Play on!</p>
+    <i class="fas fa-torii-gate"></i>
+</div>
+<div id="start-tournament-background"><span></span></div>

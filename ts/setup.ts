@@ -136,7 +136,7 @@ export function addResultIcon(element: HTMLElement, winner: boolean) {
     // add to winning .player-name
 
     element.insertAdjacentHTML('beforeend', `
-        <i class="fas ${winner ? 'fa-star' : 'fa-skull'}"></i> 
+        <i class="fas ${winner ? 'fa-star has-yellow-text' : 'fa-skull'}"></i> 
     `);
     return element;
 }

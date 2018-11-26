@@ -7,7 +7,7 @@ import { renderGame } from "./render";
 import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input';
 import { createPlayers } from "./mock-players";
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
-import { setUpGameFinishModalEvent, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener, setUpFocusTracker } from "./events";
+import { setUpGameFinishModalEvent, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener, setUpFocusTracker, setupStartTournamentButtonClick } from "./events";
 import { setUpExitButtons } from "./exit-button";
 
 window.addEventListener('StartTournament', () => {
@@ -39,8 +39,9 @@ window.addEventListener('StartTournament', () => {
     setUpFocusTracker();
 });
 
-window.dispatchEvent(new CustomEvent('StartTournament'));
+// window.dispatchEvent(new CustomEvent('StartTournament'));
 
 setUpExitButtons();
 
-// handlePlayerInput();
+handlePlayerInput();
+setupStartTournamentButtonClick();

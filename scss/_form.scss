@@ -1,3 +1,8 @@
+:disabled {
+    opacity: .5;
+    cursor: not-allowed; 
+}
+
 .form-container {
     display: flex;
     flex-direction: column;
@@ -80,7 +85,7 @@
             color: $white;
             font-size: 1.4rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(.25,.8,.25,1); 
+            transition: $standard-transition;
 
             &:hover {
                 transform-origin: center;
@@ -116,7 +121,7 @@
             font-size: 1.1rem;
             box-shadow: $box-shadow;
             border: none;
-            transition: all 0.3s cubic-bezier(.25,.8,.25,1); 
+            transition: $standard-transition;
 
             &:focus {
                 box-shadow: $box-shadow-hover;

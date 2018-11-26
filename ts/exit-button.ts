@@ -5,7 +5,6 @@ export function setUpExitButtons() {
         if (target.classList.contains('exit')) {
             const parent = target.closest('.has-exit') as HTMLElement;
             if (parent) {
-                console.log({ target }, { parent })
                 e.preventDefault();
                 parent.hidden = true;
             }
