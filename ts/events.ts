@@ -1,5 +1,6 @@
 import { IGame, IPlayer, IFinalScore } from "./types";
 import { addResultIcon } from "./setup";
+import { inputPlayers } from "./player-input";
 
 export function setUpGameFinishModalEvent(games: IGame[]) {
     window.addEventListener('click', e => {
@@ -174,16 +175,26 @@ export function setUpFocusTracker() {
 
 export function setupStartTournamentButtonClick() {
     window.addEventListener('click', e => {
+        const target = e.target as HTMLElement;
+        if (target.id === 'start-tournament') {
+            e.preventDefault();
 
-        const text = document.getElementById('start-tourament-icon');
-        const background = document.getElementById('start-tournament-background');
+            const text = document.getElementById('start-tourament-icon');
+            const background = document.getElementById('start-tournament-background');
 
-        if (text && background) {
-            text.classList.add('start-tournament-animation-icon');
-        }
+            if (text && background) {
+                text.classList.add('start-tournament-animation-icon');
+                background.classList.add('start-tournament-animation-background');
+                hideInputForm();
+            }
 
-        if (background) {
-            background.classList.add('start-tournament-animation-background');
+            window.dispatchEvent(new CustomEvent('StartTournament', {
+                detail: inputPlayers
+            }));
         }
     });
+}
+
+export function hideInputForm() {
+    document.getElementById('player-input-form').style.display = 'none';
 }

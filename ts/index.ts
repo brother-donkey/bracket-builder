@@ -5,22 +5,27 @@ import { createBracket, addByes, createGame, flattenGames, sortByRound, assignPa
 import { getNumberOfGames } from "./utilities";
 import { renderGame } from "./render";
 import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input';
-import { createPlayers } from "./mock-players";
+import { createFakePlayers } from "./mock-players";
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { setUpGameFinishModalEvent, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener, setUpFocusTracker, setupStartTournamentButtonClick } from "./events";
 import { setUpExitButtons } from "./exit-button";
 
-window.addEventListener('StartTournament', () => {
+export const players = [];
+
+window.addEventListener('StartTournament', (e: CustomEvent) => {
     // const players = inputPlayers.map(({ name, seed }) => {
     //     return new Player(name, seed);
     // });
 
-    // create some fake players
+    console.log(e);
 
-    const mockPlayers = createPlayers(30);
+    // get Players from event
+    const realPlayers = e.detail;
+
+    // const mockPlayers = createFakePlayers(30);
 
     // create tourney structure - later refactor into init initBracket function player[] => IGame tournament
-    const players = addByes(mockPlayers);
+    const players = addByes(realPlayers);
     const numberOfRounds = getNumberOfRounds(players.length);
     const baseBracket = createBracket(players);
     const tourney = createGame(baseBracket, numberOfRounds); // recursively creates all games
@@ -39,7 +44,6 @@ window.addEventListener('StartTournament', () => {
     setUpFocusTracker();
 });
 
-// window.dispatchEvent(new CustomEvent('StartTournament'));
 
 setUpExitButtons();
 

@@ -25,6 +25,7 @@ export function handlePlayerInput() {
         const playerField = target.parentElement.parentElement;
         const playerName = playerField.querySelector('input.name') as HTMLInputElement;
         const playerSeed = playerField.querySelector('input.seed') as HTMLInputElement;
+
         if (playerName.value !== '' && playerName.value !== undefined && playerName.value !== null) {
             inputPlayers.push({
                 name: playerName.value,
@@ -38,11 +39,16 @@ export function handlePlayerInput() {
             playerName.placeholder = `Enter a name!`;
         }
 
-        if (inputPlayers.length >= 4) {
+        if (inputPlayers.length >= 6) {
             startButton.disabled = false;
         }
 
         updateRoster(inputPlayers);
+
+        const nameInput = document.querySelector('.input.name') as HTMLInputElement;
+        if (nameInput) {
+            nameInput.focus();
+        }
     });
 }
 
