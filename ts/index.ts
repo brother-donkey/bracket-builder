@@ -13,14 +13,9 @@ import { setUpExitButtons } from "./exit-button";
 export const players = [];
 
 window.addEventListener('StartTournament', (e: CustomEvent) => {
-    // const players = inputPlayers.map(({ name, seed }) => {
-    //     return new Player(name, seed);
-    // });
-
-    console.log(e);
 
     // get Players from event
-    const realPlayers = e.detail;
+    const realPlayers = e.detail as IPlayer[];
 
     // const mockPlayers = createFakePlayers(30);
 
@@ -33,7 +28,6 @@ window.addEventListener('StartTournament', (e: CustomEvent) => {
 
     createRoundContainers(tourneyElt, numberOfRounds);
 
-    // renderGame(tourney, tourneyElt);
     const flat = [];
     const withParents = assignParentGames(tourney);
     const games = flattenGames(withParents, flat);
@@ -43,7 +37,6 @@ window.addEventListener('StartTournament', (e: CustomEvent) => {
     setUpWinnerDeclaredEventListener(games);
     setUpFocusTracker();
 });
-
 
 setUpExitButtons();
 

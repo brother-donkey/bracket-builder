@@ -62,6 +62,14 @@ export function setUpWinnerDeclaredEventListener(games) {
     });
 }
 
+
+export function setUpTournamentFinishedEventListener(games) {
+    window.addEventListener('TournamentFinishedEvent', (e: CustomEvent) => {
+        const { detail: winner } = e;
+        console.log(`Congrates ${winner}`)
+    }
+}
+
 export function findGameElement(id: number): HTMLElement {
     return document.querySelector(`.game[data-game-id="${id}"]`);
 }

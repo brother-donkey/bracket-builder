@@ -47,14 +47,28 @@ export class Game implements IGame {
         this.loser.record.playersLostTo.push(this.winner.name);
         this.loser.record.pointDifferential -= pointDifference;
 
+        // check for the end of the tournament
+        if (!this.parent) {
+            const tournamentFinishedEvent = new CustomEvent('TournamentFinishedEvent', {
+                "detail": this
+            });
+
+            window.dispatchEvent(tournamentFinishedEvent);
+
+            return this.winner;
+        }
+
+        // otherwise mark the game's winner
         const winnerDeclaredEvent = new CustomEvent('WinnerDeclaredEvent', {
             "detail": this
         });
 
-        if (this.parent.prelims[0].id === this.id) {
-            this.parent.player1 = winner;
-        } else if (this.parent.prelims[1].id === this.id) {
-            this.parent.player2 = winner;
+        if (this.parent) {
+            if (this.parent.prelims[0].id === this.id) {
+                this.parent.player1 = winner;
+            } else if (this.parent.prelims[1].id === this.id) {
+                this.parent.player2 = winner;
+            }
         }
 
         window.dispatchEvent(winnerDeclaredEvent);

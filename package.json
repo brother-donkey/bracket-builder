@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "deploy": "npm run start && cd ./dist && az webapp up --location westus --name bracket-builder; cd ../"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cssnano": "^4.1.7",
     "posthtml": "^0.11.3",
     "posthtml-cli": "^0.4.7",
     "posthtml-include": "^1.2.0",

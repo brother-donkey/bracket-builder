@@ -2,8 +2,39 @@
     background: $blue;
     padding: .5rem;
     color: $white;
+    display: flex;
+    position: relative;
+    
+    .header-icon {
+        font-size: 3rem;
+        padding: .5rem;
+    }
+
+    .header-text {
+        padding: .5rem;
+    }
 
     h1 {
         font-size: 2rem;
     }
+
+    .header-settings {
+        position: absolute;
+        right: .5rem;
+        top: .5rem;
+
+        button {
+            appearance: none;
+            border: none;
+            background: none;
+            padding: .5rem;
+            color: $white;
+            font-size: 1.5rem;
+
+            &:hover {
+                animation: spin 2s cubic-bezier(.25,.8,.25,1) 1;
+            }
+        }
+    }
+    
 }
