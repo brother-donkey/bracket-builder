@@ -9,20 +9,23 @@ import { createFakePlayers } from "./mock-players";
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { setUpGameFinishModalEvent, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener, setUpFocusTracker, setupStartTournamentButtonClick } from "./events";
 import { setUpExitButtons } from "./exit-button";
+import { players64 } from "./mocks";
 
 export const players = [];
+export const useFakePlayers: boolean = true;
 
 window.addEventListener('StartTournament', (e: CustomEvent) => {
     // const players = inputPlayers.map(({ name, seed }) => {
     //     return new Player(name, seed);
     // });
-
+    debugger
     console.log(e);
+
+    // const mockPlayers = players64;
 
     // get Players from event
     const realPlayers = e.detail;
 
-    // const mockPlayers = createFakePlayers(30);
 
     // create tourney structure - later refactor into init initBracket function player[] => IGame tournament
     const players = addByes(realPlayers);
@@ -44,8 +47,8 @@ window.addEventListener('StartTournament', (e: CustomEvent) => {
     setUpFocusTracker();
 });
 
-
 setUpExitButtons();
 
 handlePlayerInput();
+
 setupStartTournamentButtonClick();

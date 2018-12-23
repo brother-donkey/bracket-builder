@@ -1,4 +1,6 @@
-interface SimplePlayer {
+import { useFakePlayers } from ".";
+
+export interface SimplePlayer {
     name: string;
     seed: number;
 }
@@ -7,12 +9,19 @@ export const inputPlayers = [] as SimplePlayer[];
 export const playerInputForm = document.getElementById('player-input-form') as HTMLFormElement;
 export const tournamentRoster = document.getElementById('player-input-added-players') as HTMLElement;
 
-playerInputForm.addEventListener('submit', e => {
-    e.preventDefault();
-    // window.dispatchEvent(new CustomEvent('StartTournament'));
-})
+
 
 export function handlePlayerInput() {
+    playerInputForm.addEventListener('submit', e => {
+        e.preventDefault();
+    });
+
+    const startButton = document.getElementById('start-tournament') as HTMLButtonElement;
+
+    if (useFakePlayers) {
+        startButton.disabled = false;
+    }
+
     playerInputForm.hidden = false;
 
     window.addEventListener('click', e => {
@@ -21,7 +30,6 @@ export function handlePlayerInput() {
             return;
         }
 
-        const startButton = document.getElementById('start-tournament') as HTMLButtonElement;
         const playerField = target.parentElement.parentElement;
         const playerName = playerField.querySelector('input.name') as HTMLInputElement;
         const playerSeed = playerField.querySelector('input.seed') as HTMLInputElement;

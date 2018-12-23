@@ -117,7 +117,7 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
     sortedGames.forEach(game => {
         const ready = gameReadyToPlay(game);
         const readyClass = ready ? 'ready' : '';
-        const container = document.querySelector(`[data-round-number="${game.round}"]`);
+        const container = outerContainer.querySelector(`[data-round-number="${game.round}"]`);
         container.insertAdjacentHTML('beforeend', `
         <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}" data-game-id="${game.id}">
             <div class="player" data-player-name="${game.player1.name}" data-player-by="${playerIsBy(game.player1)}">

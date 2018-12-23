@@ -1,6 +1,8 @@
 import { IGame, IPlayer, IFinalScore } from "./types";
 import { addResultIcon } from "./setup";
 import { inputPlayers } from "./player-input";
+import { useFakePlayers } from ".";
+import { players64 } from "./mocks";
 
 export function setUpGameFinishModalEvent(games: IGame[]) {
     window.addEventListener('click', e => {
