@@ -1,26 +1,26 @@
-import { ITBAPlayer, IPlayer, IGame, IRecord, BracketItem } from "./types";
-import { Game } from "./game";
-import { Player, TBAPlayer } from "./player";
-import { createBracket, addByes, createGame, flattenGames, sortByRound, assignParentGames, renderGamesInRoundContainers } from "./setup";
-import { getNumberOfGames } from "./utilities";
-import { renderGame } from "./render";
-import { playerInputForm, handlePlayerInput, inputPlayers } from './player-input';
-import { createFakePlayers } from "./mock-players";
-import { createRoundContainers, getNumberOfRounds } from "./rounds";
-import { setUpGameFinishModalEvent, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener, setUpFocusTracker, setupStartTournamentButtonClick } from "./events";
+import { setUpFocusTracker, setUpGameFinishModalEvent, setupStartTournamentButtonClick, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener } from "./events";
 import { setUpExitButtons } from "./exit-button";
+import { mockFamily } from "./mocks";
+import { Player } from "./player";
+import { handlePlayerInput, SimplePlayer } from './player-input';
+import { createRoundContainers, getNumberOfRounds } from "./rounds";
+import { addByes, assignParentGames, createBracket, createGame, flattenGames, renderGamesInRoundContainers } from "./setup";
+import { IPlayer } from "./types";
 
 export const players = [];
+export const useMockPlayers: boolean = true;
+export const mockPlayers = mockFamily;
 
 window.addEventListener('StartTournament', (e: CustomEvent) => {
 
     // get Players from event
-    const realPlayers = e.detail as IPlayer[];
+    const playersWithoutByes = useMockPlayers ? mockPlayers : e.detail as SimplePlayer[];
 
     // const mockPlayers = createFakePlayers(30);
 
     // create tourney structure - later refactor into init initBracket function player[] => IGame tournament
-    const players = addByes(realPlayers);
+    const playersWithBys = addByes(playersWithoutByes);
+    const players = convertSimplePlayersToFull(playersWithBys);
     const numberOfRounds = getNumberOfRounds(players.length);
     const baseBracket = createBracket(players);
     const tourney = createGame(baseBracket, numberOfRounds); // recursively creates all games
@@ -42,3 +42,7 @@ setUpExitButtons();
 
 handlePlayerInput();
 setupStartTournamentButtonClick();
+
+export function convertSimplePlayersToFull(simplePlayers: SimplePlayer[]): IPlayer[] {
+    return simplePlayers.map(player => new Player(player.name, player.seed));
+}

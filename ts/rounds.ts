@@ -5,6 +5,7 @@ export function getNumberOfRounds(numberOfPlayers: number): number {
         counter++;
         playersDivided = playersDivided / 2;
     }
+    debugger;
     return counter;
 }
 

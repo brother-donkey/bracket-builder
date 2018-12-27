@@ -1,4 +1,5 @@
-interface SimplePlayer {
+
+export interface SimplePlayer {
     name: string;
     seed: number;
 }
@@ -10,7 +11,7 @@ export const tournamentRoster = document.getElementById('player-input-added-play
 playerInputForm.addEventListener('submit', e => {
     e.preventDefault();
     // window.dispatchEvent(new CustomEvent('StartTournament'));
-})
+});
 
 export function handlePlayerInput() {
     playerInputForm.hidden = false;

@@ -1,7 +1,8 @@
-import { IPlayer, BracketItem, IGame } from "./types";
-import { Player, TBAPlayer } from "./player";
 import { Game } from "./game";
+import { Player, TBAPlayer } from "./player";
+import { SimplePlayer } from "./player-input";
 import { gameReadyToPlay } from "./render";
+import { BracketItem, IGame, IPlayer } from "./types";
 
 export let gameId: number = 0;
 
@@ -40,7 +41,7 @@ export function createBracket(arr: IPlayer[]) {
 export function createGame(bracket: BracketItem, round: number): IGame {
 
     // bottom level of games, no parent
-
+    debugger;
     if (!Array.isArray(bracket[0]) && !Array.isArray(bracket[1])) {
         const player1 = bracket[0] as IPlayer;
         const player2 = bracket[1] as IPlayer;
@@ -67,13 +68,15 @@ export function createGame(bracket: BracketItem, round: number): IGame {
     );
 }
 
-export function addByes(arr: IPlayer[]) {
-    const remainder = 4 - arr.length % 4;
+export function addByes(arr: SimplePlayer[]): SimplePlayer[] {
+    const remainder = arr.length <= 8 ?
+        4 - arr.length % 4 :
+        8 - arr.length % 8;
 
     // determine if divisible by 4
     if (remainder !== 0) {
         for (let i = 0; i < remainder; i++) {
-            arr.push(new Player(`Bye ${i}`, 0)); // push in some meaningless items to give top seeds a by
+            arr.push({ name: `Bye ${i}`, seed: 0 }); // push in some meaningless items to give top seeds a by
         }
     }
     return arr;
@@ -118,6 +121,11 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
         const ready = gameReadyToPlay(game);
         const readyClass = ready ? 'ready' : '';
         const container = document.querySelector(`[data-round-number="${game.round}"]`);
+        debugger;
+        if (!container) {
+            throw new Error;
+            return;
+        }
         container.insertAdjacentHTML('beforeend', `
         <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}" data-game-id="${game.id}">
             <div class="player" data-player-name="${game.player1.name}" data-player-by="${playerIsBy(game.player1)}">
