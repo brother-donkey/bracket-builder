@@ -37,7 +37,8 @@ export async function startTournament(e: CustomEvent) {
     createRoundContainers(tourneyElt, numberOfRounds);
 
     const withParents = assignParentGames(tourney);
-    const games = flattenGames(withParents, []);
+    const flattenedGames = flattenGames(withParents, []);
+    const games = markByesAsFinished(flattenedGames);
     renderGamesInRoundContainers(games, tourneyElt);
     setUpGameFinishModalEvent(games);
     setupWinnerDeclaredEvent(games);
@@ -48,7 +49,6 @@ export async function startTournament(e: CustomEvent) {
 function createTournamentStructure(playersWithoutByes: SimplePlayer[]): { numberOfRounds: number; tourney: IGame } {
     const playersWithBys = addByes(playersWithoutByes);
     const players = convertSimplePlayersToFull(playersWithBys);
-    console.log(players);
     const numberOfRounds = getNumberOfRounds(players.length);
     const baseBracket = createBracket(players);
     const tourney = createGame(baseBracket, numberOfRounds); // recursively creates all games
@@ -61,4 +61,20 @@ function handleMockData() {
     }
     const startButton = document.getElementById('start-tournament') as HTMLButtonElement;
     startButton.disabled = false;
+}
+
+function markByesAsFinished(games: IGame[]): IGame[] {
+    games.forEach(game => {
+        const { player1, player2 } = game;
+        if (game.hasBye) {
+            if (player1.isBye) {
+                game.declareWinner(player2, [0, 0]);
+            }
+
+            if (player2.isBye) {
+                game.declareWinner(player1, [0, 0]);
+            }
+        }
+    });
+    return games;
 }

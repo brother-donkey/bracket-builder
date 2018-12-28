@@ -1,4 +1,5 @@
 import { useMockPlayers } from ".";
+import { contentLoaded } from "./dom";
 
 export interface SimplePlayer {
     name: string;
@@ -14,7 +15,9 @@ playerInputForm.addEventListener('submit', e => {
     // window.dispatchEvent(new CustomEvent('StartTournament'));
 });
 
-export function handlePlayerInput() {
+export async function handlePlayerInput() {
+    await contentLoaded;
+
     playerInputForm.hidden = false;
 
     window.addEventListener('click', e => {

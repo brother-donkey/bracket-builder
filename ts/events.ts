@@ -1,6 +1,6 @@
-import { IGame, IPlayer, IFinalScore } from "./types";
-import { addResultIcon } from "./setup";
 import { inputPlayers } from "./player-input";
+import { addResultIcon } from "./setup";
+import { IGame, IPlayer } from "./types";
 
 export function setUpGameFinishModalEvent(games: IGame[]) {
     window.addEventListener('click', e => {
@@ -121,7 +121,9 @@ export function setupWinnerDeclaredEvent(games: IGame[]) {
             const formContainer = document.querySelector('.form-container') as HTMLElement;
             formContainer.hidden = true;
             const lastClickedGame = document.querySelector('[data-last-focused-game="true"]') as HTMLElement;
-            lastClickedGame.focus();
+            if (lastClickedGame) {
+                lastClickedGame.focus();
+            }
 
             const gameContainer = document.getElementById(`game-${match.id}`) as HTMLElement;
             gameContainer.classList.add('complete-game');
