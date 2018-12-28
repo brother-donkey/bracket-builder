@@ -1,3 +1,4 @@
+import { useMockPlayers } from ".";
 
 export interface SimplePlayer {
     name: string;
@@ -40,7 +41,7 @@ export function handlePlayerInput() {
             playerName.placeholder = `Enter a name!`;
         }
 
-        if (inputPlayers.length >= 6) {
+        if (inputPlayers.length >= 6 || useMockPlayers) {
             startButton.disabled = false;
         }
 

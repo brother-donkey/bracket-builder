@@ -6,7 +6,7 @@ import { BracketItem, IGame, IPlayer } from "./types";
 
 export let gameId: number = 0;
 
-export function createBracket(arr: IPlayer[]) {
+export function createBracket(arr: IPlayer[]): any {
 
     if (arr.length <= 2) {
         return arr;
@@ -41,7 +41,6 @@ export function createBracket(arr: IPlayer[]) {
 export function createGame(bracket: BracketItem, round: number): IGame {
 
     // bottom level of games, no parent
-    debugger;
     if (!Array.isArray(bracket[0]) && !Array.isArray(bracket[1])) {
         const player1 = bracket[0] as IPlayer;
         const player2 = bracket[1] as IPlayer;
@@ -121,11 +120,7 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
         const ready = gameReadyToPlay(game);
         const readyClass = ready ? 'ready' : '';
         const container = document.querySelector(`[data-round-number="${game.round}"]`);
-        debugger;
-        if (!container) {
-            throw new Error;
-            return;
-        }
+
         container.insertAdjacentHTML('beforeend', `
         <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}" data-game-id="${game.id}">
             <div class="player" data-player-name="${game.player1.name}" data-player-by="${playerIsBy(game.player1)}">
