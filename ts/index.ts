@@ -48,6 +48,7 @@ export async function startTournament(e: CustomEvent) {
 function createTournamentStructure(playersWithoutByes: SimplePlayer[]): { numberOfRounds: number; tourney: IGame } {
     const playersWithBys = addByes(playersWithoutByes);
     const players = convertSimplePlayersToFull(playersWithBys);
+    console.log(players);
     const numberOfRounds = getNumberOfRounds(players.length);
     const baseBracket = createBracket(players);
     const tourney = createGame(baseBracket, numberOfRounds); // recursively creates all games

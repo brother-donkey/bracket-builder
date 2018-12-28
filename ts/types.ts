@@ -3,6 +3,7 @@ export interface IPlayer {
     name: string;
     seed: number;
     record: IRecord;
+    isBye: boolean;
 }
 
 export interface ITBAPlayer {
@@ -29,6 +30,7 @@ export interface IGame {
     round: number;
     parent?: IGame | null;
     score: IFinalScore | null;
+    hasBye: boolean;
 }
 
 export interface IRecord {

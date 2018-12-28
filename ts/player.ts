@@ -6,7 +6,10 @@ export class TBAPlayer implements ITBAPlayer {
     record: null;
 }
 
+const byeRegex = /^Bye/;
+
 export class Player implements IPlayer {
+
     constructor(name: string, seed?: number) {
         this.name = name;
         this.seed = seed || 0;
@@ -17,9 +20,11 @@ export class Player implements IPlayer {
             playersLostTo: [],
             playersBeaten: []
         };
+        this.isBye = byeRegex.test(name);
     }
 
     name: string;
     seed: number;
     record: IRecord;
+    isBye: boolean;
 };
