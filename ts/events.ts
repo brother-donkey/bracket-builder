@@ -139,13 +139,16 @@ export function populateParentGame(finishedGame: IGame, nextGame: IGame) {
     const isTop = isTopPlayerInGame(finishedGame, nextGame);
     const nextGameElt = document.querySelector(`#game-${nextGame.id}`) as HTMLElement;
     const players = Array.from(nextGameElt.querySelectorAll(`.player`)) as HTMLElement[];
-    const index = isTop ? 1 : 0;
+    const index = isTop ? 0 : 1;
     const player = players[index];
     const seed = player.querySelector(`.seed`);
     const playerName = player.querySelector('.player-name');
 
     playerName.textContent = finishedGame.winner.name;
     seed.textContent = finishedGame.winner.seed.toString();
+    seed.classList.remove('fas');
+    seed.classList.remove('fa-circle');
+
     player.dataset.playerName = finishedGame.winner.name;
 
     if (gameElementIsReadyToPlay(nextGameElt, players, nextGame.id)) {

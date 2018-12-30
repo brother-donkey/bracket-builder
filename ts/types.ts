@@ -10,6 +10,7 @@ export interface ITBAPlayer {
     name: string;
     seed: null;
     record: null;
+    isBye: boolean;
 }
 
 export interface Tourney {

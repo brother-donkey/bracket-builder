@@ -3,7 +3,8 @@ import { IPlayer, IRecord, ITBAPlayer } from "./types";
 export class TBAPlayer implements ITBAPlayer {
     name = "TBD";
     seed = null;
-    record: null;
+    record = null;
+    isBye = false;
 }
 
 const byeRegex = /^Bye/;

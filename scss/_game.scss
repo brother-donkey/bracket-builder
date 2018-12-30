@@ -69,7 +69,7 @@ $border-radius-left-side: 0 20px 20px 0;
         flex-direction: column;
         color: $white;
         flex-wrap: wrap;
-        z-index: 2;
+        z-index: 1;
 
         .scored-loser,
         .scored-winner {

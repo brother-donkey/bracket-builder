@@ -118,11 +118,12 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
 
     sortedGames.forEach(game => {
         const ready = gameReadyToPlay(game);
-        const readyClass = ready ? 'ready' : '';
+        const { winner, hasBye } = game;
         const container = document.querySelector(`[data-round-number="${game.round}"]`);
+        const gameStateClass = hasBye || winner ? 'complete' : ready ? 'ready' : '';
 
         container.insertAdjacentHTML('beforeend', `
-        <article id="game-${game.id}" class="game box-shadow-1 ${readyClass}" data-game-id="${game.id}">
+        <article id="game-${game.id}" class="game box-shadow-1 ${gameStateClass}" data-game-id="${game.id}">
             <div class="player" data-player-name="${game.player1.name}" data-player-by="${playerIsBy(game.player1)}">
                 <span class="seed is-higher ${game.player1.seed ? '' : 'fas fa-circle'}">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>
             </div>
