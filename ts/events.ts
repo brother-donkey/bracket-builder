@@ -26,7 +26,7 @@ export function setUpGameFinishModalEvent(games: IGame[]) {
             secondPlayerName.textContent = match.player2.name;
             firstPlayerScore.value = undefined;
             secondPlayerScore.value = undefined;
-            firstPlayerScore.focus();
+            secondPlayerScore.focus(); // because I'm a fool, I've put the second one first.
         }
     });
 }
@@ -136,7 +136,7 @@ export function isTopPlayerInGame(finishedGame: IGame, nextGame: IGame): boolean
 }
 
 export function populateParentGame(finishedGame: IGame, nextGame: IGame) {
-    const isTop = isTopPlayerInGame(finishedGame, nextGame);
+    const isTop = !isTopPlayerInGame(finishedGame, nextGame);
     const nextGameElt = document.querySelector(`#game-${nextGame.id}`) as HTMLElement;
     const players = Array.from(nextGameElt.querySelectorAll(`.player`)) as HTMLElement[];
     const index = isTop ? 0 : 1;
