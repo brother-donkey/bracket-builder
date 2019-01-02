@@ -32,6 +32,8 @@ export interface IGame {
     parent?: IGame | null;
     score: IFinalScore | null;
     hasBye: boolean;
+    winningScore: number;
+    losingScore: number;
 }
 
 export interface IRecord {

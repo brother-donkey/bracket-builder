@@ -1,5 +1,6 @@
 import { contentLoaded } from "./dom";
 import { setUpFocusTracker, setUpGameFinishModalEvent, setupStartTournamentButtonClick, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener } from "./events";
+import { setUpGameRedeclarationEvent } from "./events/game-redeclaration";
 import { setUpExitButtons } from "./exit-button";
 import { mockFamily } from "./mocks";
 import { Player } from "./player";
@@ -40,9 +41,12 @@ export async function startTournament(e: CustomEvent) {
     const flattenedGames = flattenGames(withParents, []);
     const games = markByesAsFinished(flattenedGames);
     renderGamesInRoundContainers(games, tourneyElt);
+
+    // Event setup
     setUpGameFinishModalEvent(games);
     setupWinnerDeclaredEvent(games);
     setUpWinnerDeclaredEventListener(games);
+    setUpGameRedeclarationEvent(games);
     setUpFocusTracker();
 }
 

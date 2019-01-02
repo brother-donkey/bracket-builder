@@ -1,3 +1,4 @@
+import { resetRecordOnRedeclaredGame } from "./reset";
 import { IFinalScore, IGame, IPlayer } from "./types";
 
 export class Game implements IGame {
@@ -25,9 +26,35 @@ export class Game implements IGame {
     parent: IGame | null;
     score: IFinalScore | null;
     hasBye: boolean;
+    losingScore: number;
+    winningScore: number;
 
     declareWinner = (winner: IPlayer, score: [number, number]) => {
 
+        if (this.finished && winner.name !== this.winner.name) {
+
+            const userInput = prompt(`This game was already finished. This will reset all parent games. Are you sure you want to redo it? ('Yes' to continue.)`);
+
+            if (userInput.toLowerCase() === 'yes') {
+                resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, true, this.winningScore, this.losingScore);
+                window.dispatchEvent(new CustomEvent('GameRedeclarationEvent', {
+                    detail: this
+                }));
+            }
+
+        }
+
+        if (this.finished && winner.name === this.winner.name) {
+            // the score has been updated but the winner is the same, might not be worth bothering with this branch
+            // recalculate points differential either way
+
+            const previousWinningScore = this.score[0] > this.score[1] ? this.score[0] : this.score[1];
+            const previousLosingScore = this.score[0] > this.score[1] ? this.score[1] : this.score[0];
+
+            resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, false, previousWinningScore, previousLosingScore);
+        }
+
+        this.finished = true;
 
         const winningScore = score[0] > score[1] ? score[0] : score[1];
         const losingScore = score[0] > score[1] ? score[1] : score[0];
@@ -38,6 +65,8 @@ export class Game implements IGame {
 
         this.winner = winner;
         this.loser = this.winner === this.player1 ? this.player2 : this.player1;
+        this.winningScore = winningScore;
+        this.losingScore = losingScore;
 
         const pointDifference = Math.abs(score[0] - score[1]);
 
