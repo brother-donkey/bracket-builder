@@ -121,14 +121,16 @@ export function renderGamesInRoundContainers(games: IGame[], outerContainer: HTM
         const { winner, hasBye } = game;
         const container = document.querySelector(`[data-round-number="${game.round}"]`);
         const gameStateClass = hasBye || winner ? 'complete' : ready ? 'ready' : '';
+        const player1ByeIcon = game.hasBye && !game.player1.isBye ? `<i class="fas fa-fast-forward has-blue-text"></i>` : '';
+        const player2ByeIcon = game.hasBye && !game.player2.isBye ? `<i class="fas fa-fast-forward has-blue-text"></i>` : '';
 
         container.insertAdjacentHTML('beforeend', `
         <article id="game-${game.id}" class="game box-shadow-1 ${gameStateClass}" data-game-id="${game.id}">
             <div class="player" data-player-name="${game.player2.name}" data-player-by="${playerIsBy(game.player2)}">
-                <span class="seed is-lower ${game.player2.seed ? '' : 'fas fa-circle'}">${game.player2.seed || ''}</span><span class="player-name">${game.player2.name}</span>
+                <span class="seed is-lower ${game.player2.seed ? '' : 'fas fa-circle'}">${game.player2.seed || ''}</span><span class="player-name">${game.player2.name}</span>${player2ByeIcon}
             </div>    
             <div class="player" data-player-name="${game.player1.name}" data-player-by="${playerIsBy(game.player1)}">
-                <span class="seed is-higher ${game.player1.seed ? '' : 'fas fa-circle'}">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>
+                <span class="seed is-higher ${game.player1.seed ? '' : 'fas fa-circle'}">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>${player1ByeIcon}
             </div>
             <button aria-label="finish the game between ${game.player1.name} and ${game.player2.name}" class="finish-game" data-game-id="${game.id}"><span class="chevron" aria-hidden="true"></span></button>
         </article>
