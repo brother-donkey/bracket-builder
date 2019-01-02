@@ -33,7 +33,7 @@
         transition: $standard-transition;
         &:hover,
         &:focus:not(:active) {
-            box-shadow: $box-shadow-hover;
+            box-shadow: $box-shadow-heavy;
         }
 
         &:hover {
@@ -76,7 +76,7 @@
         color: $white;
 
         &:hover {
-            box-shadow: $box-shadow-hover;
+            box-shadow: $box-shadow-heavy;
             z-index: 3;
         }
     }
@@ -115,7 +115,7 @@
     transition: $standard-transition;
 
     &:hover:not(:disabled) {
-        box-shadow: $box-shadow-hover;
+        box-shadow: $box-shadow-heavy;
         transform: scale(1.1);
     }
 }

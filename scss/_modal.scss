@@ -1,0 +1,110 @@
+.modal {
+    // &:not(.active) {
+    //     display: none;
+    // }
+
+    display: block;
+    position: fixed;
+    top: 20vh;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: $white;
+    max-width: 98%;
+    min-height: 50px;
+    width: 30rem;
+    border-radius: 20px;
+
+    > * {
+        padding: .5rem;
+    }
+
+    >:first-child {
+        border-radius: 20px 20px 0 0;
+    }
+
+    >:last-child {
+        border-radius: 0 20px 20px 0;
+    }
+
+    box-shadow: $box-shadow-heavy;
+
+    .modal-exit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 0;
+        border: none;
+        background: transparent;
+        color: $white;
+        font-size: 1rem;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 0 20px 0 0;
+
+        &:hover {
+            background: $red;
+            color: $white;
+        }
+    }
+    .header {
+        display: flex;
+        justify-content: center;
+    }
+    .header-title {
+        // display: block;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    .content {}
+    .footer {
+        display: flex;
+        flex-direction: row;
+
+        &.is-paddingless {
+            padding: 0;
+        }
+
+        .fas {
+            font-size: .8rem;
+        }
+    }
+    .nevermind {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        flex-grow: 1;
+        padding: .5rem;
+        border: 1px solid $red;
+        background: $red;
+        color: $white;
+        margin: 0;
+        border-radius: 0 0 0 20px;
+        font-size: 1.2rem;
+        cursor: pointer;
+
+        &:hover {
+            background: darken($red, 10%);
+        }
+    }
+    .accept {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        flex-grow: 1;
+        padding: .5rem;
+        border: 1px solid $green;
+        background: $green;
+        color: $white;
+        margin: 0;
+        border-radius: 0 0 20px 0;
+        font-size: 1.2rem;
+        cursor: pointer;
+
+        &:hover {
+            background: darken($green, 10%);;
+        }
+    }
+}

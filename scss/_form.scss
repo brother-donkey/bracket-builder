@@ -124,7 +124,7 @@
             transition: $standard-transition;
 
             &:focus {
-                box-shadow: $box-shadow-hover;
+                box-shadow: $box-shadow-heavy;
                 transform: scale(1.05);
             }
         }
