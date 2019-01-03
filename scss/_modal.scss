@@ -1,8 +1,19 @@
-.modal {
-    // &:not(.active) {
-    //     display: none;
-    // }
+.modal-overlay {
+ .modal[hidden] + & {
+     display: none;
+ }
 
+ display: block;
+ position: fixed;
+ top: 0;
+ right: 0;
+ left: 0;
+ bottom: 0;
+ z-index: 12;
+ background-color: transparentize($grey, .1);
+}
+
+.modal {
     display: block;
     position: fixed;
     top: 20vh;
@@ -14,6 +25,7 @@
     min-height: 50px;
     width: 30rem;
     border-radius: 20px;
+    z-index: 13;
 
     > * {
         padding: .5rem;
@@ -56,7 +68,6 @@
         font-size: 1.2rem;
         text-align: center;
     }
-    .content {}
     .footer {
         display: flex;
         flex-direction: row;
@@ -69,7 +80,7 @@
             font-size: .8rem;
         }
     }
-    .nevermind {
+    .cancel {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -88,7 +99,7 @@
             background: darken($red, 10%);
         }
     }
-    .accept {
+    .confirm {
         display: flex;
         flex-direction: row;
         align-items: center;

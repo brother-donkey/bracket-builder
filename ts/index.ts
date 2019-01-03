@@ -8,6 +8,7 @@ import { handlePlayerInput, SimplePlayer } from './player-input';
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { addByes, assignParentGames, createBracket, createGame, flattenGames, renderGamesInRoundContainers } from "./setup";
 import { IGame, IPlayer } from "./types";
+import { setUpModalEvents } from "./utilities";
 
 export const players = [];
 export const useMockPlayers: boolean = true;
@@ -19,6 +20,7 @@ setUpExitButtons();
 handleMockData();
 handlePlayerInput();
 setupStartTournamentButtonClick();
+setUpModalEvents();
 
 export function convertSimplePlayersToFull(simplePlayers: SimplePlayer[]): IPlayer[] {
     return simplePlayers.map(player => new Player(player.name, player.seed));
