@@ -3,12 +3,12 @@ import { setUpFocusTracker, setUpGameFinishModalEvent, setupStartTournamentButto
 import { setUpGameRedeclarationEvent } from "./events/game-redeclaration";
 import { setUpExitButtons } from "./exit-button";
 import { mockFamily } from "./mocks";
+import { setUpModalEvents } from "./modal";
 import { Player } from "./player";
 import { handlePlayerInput, SimplePlayer } from './player-input';
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { addByes, assignParentGames, createBracket, createGame, flattenGames, renderGamesInRoundContainers } from "./setup";
 import { IGame, IPlayer } from "./types";
-import { setUpModalEvents } from "./utilities";
 
 export const players = [];
 export const useMockPlayers: boolean = true;

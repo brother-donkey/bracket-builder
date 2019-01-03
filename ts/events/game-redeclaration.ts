@@ -1,16 +1,23 @@
+import { awaitModalConfirmation, populateModalContent, redeclarationModalConfig, showModal } from "../modal";
 import { TBAPlayer } from "../player";
 import { removeStarOrSkull } from "../reset";
 import { IGame } from "../types";
 
 export function setUpGameRedeclarationEvent(games: IGame[]) {
-    window.addEventListener('GameRedeclarationEvent', (e: CustomEvent) => {
+    window.addEventListener('GameRedeclarationEvent', async (e: CustomEvent) => {
         const redeclaredGame = e.detail as IGame;
         const gameContainer = document.getElementById(`game-${redeclaredGame.id}`)
-        removeStarOrSkull(gameContainer)
-        resetParentGamesStatus(redeclaredGame);
-        // reset parent games,
-        // reset their status 
-        // their UI
+
+        const warningModal = await populateModalContent(redeclarationModalConfig);
+        showModal(warningModal);
+
+        awaitModalConfirmation(warningModal, () => {
+            removeStarOrSkull(gameContainer)
+            resetParentGamesStatus(redeclaredGame);
+            // reset parent games,
+            // reset their status 
+            // their UI
+        });
     });
 }
 
@@ -28,18 +35,21 @@ export function resetParentGamesStatus(game: IGame) {
         const gameElt = document.getElementById(`game-${game.id}`) as HTMLElement;
 
         const playerElt = gameElt.querySelector(`#game-${game.id} [data-player-name="${previousWinner}"`) as HTMLElement;
-        playerElt.classList.remove('complete-game');
-        const seed = playerElt.querySelector('.seed') as HTMLElement;
-        const name = playerElt.querySelector('.player-name') as HTMLElement;
+        if (playerElt) {
+            playerElt.classList.remove('complete-game');
+            const seed = playerElt.querySelector('.seed') as HTMLElement;
+            const name = playerElt.querySelector('.player-name') as HTMLElement;
 
-        if (!isFirstGame) {
-            seed.textContent = '';
-            seed.classList.add('fas');
-            seed.classList.add('fa-circle');
+            if (!isFirstGame) {
+                seed.textContent = '';
+                seed.classList.add('fas');
+                seed.classList.add('fa-circle');
 
-            name.textContent = tbdPlayer.name;
-            name.dataset.playerName = 'TBD';
+                name.textContent = tbdPlayer.name;
+                name.dataset.playerName = 'TBD';
+            }
         }
+
 
         const players = Array.from(gameElt.querySelectorAll(`#game-${game.id} .player`)) as HTMLElement[];
         const icons = Array.from(gameElt.querySelectorAll('fas')) as HTMLElement[];
@@ -76,14 +86,3 @@ export function resetParentGamesStatus(game: IGame) {
         game = game.parent;
     }
 }
-
-
-//   <article id="game-${game.id}" class="game box-shadow-1 ${gameStateClass}" data-game-id="${game.id}">
-//             <div class="player" data-player-name="${game.player2.name}" data-player-by="${playerIsBy(game.player2)}">
-//                 <span class="seed is-lower ${game.player2.seed ? '' : 'fas fa-circle'}">${game.player2.seed || ''}</span><span class="player-name">${game.player2.name}</span>
-//             </div>    
-//             <div class="player" data-player-name="${game.player1.name}" data-player-by="${playerIsBy(game.player1)}">
-//                 <span class="seed is-higher ${game.player1.seed ? '' : 'fas fa-circle'}">${game.player1.seed || ''}</span><span class="player-name">${game.player1.name}</span>
-//             </div>
-//             <button aria-label="finish the game between ${game.player1.name} and ${game.player2.name}" class="finish-game" data-game-id="${game.id}"><span class="chevron" aria-hidden="true"></span></button>
-//         </article>

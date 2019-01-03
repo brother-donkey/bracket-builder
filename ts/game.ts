@@ -33,15 +33,10 @@ export class Game implements IGame {
 
         if (this.finished && winner.name !== this.winner.name) {
 
-            const userInput = prompt(`This game was already finished. This will reset all parent games. Are you sure you want to redo it? ('Yes' to continue.)`);
-
-            if (userInput.toLowerCase() === 'yes') {
-                resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, true, this.winningScore, this.losingScore);
-                window.dispatchEvent(new CustomEvent('GameRedeclarationEvent', {
-                    detail: this
-                }));
-            }
-
+            resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, true, this.winningScore, this.losingScore);
+            window.dispatchEvent(new CustomEvent('GameRedeclarationEvent', {
+                detail: this
+            }));
         }
 
         if (this.finished && winner.name === this.winner.name) {
