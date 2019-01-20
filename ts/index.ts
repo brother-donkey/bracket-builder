@@ -1,6 +1,7 @@
 import { contentLoaded } from "./dom";
 import { setUpFocusTracker, setUpGameFinishModalEvent, setupStartTournamentButtonClick, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener } from "./events";
 import { setUpGameRedeclarationEvent } from "./events/game-redeclaration";
+import { setupTournamentFinishedEvent } from "./events/tournament-finished";
 import { setUpExitButtons } from "./exit-button";
 import { mockFamily } from "./mocks";
 import { setUpModalEvents } from "./modal";
@@ -48,7 +49,8 @@ export async function startTournament(e: CustomEvent) {
     setUpGameFinishModalEvent(games);
     setupWinnerDeclaredEvent(games);
     setUpWinnerDeclaredEventListener(games);
-    setUpGameRedeclarationEvent(games);
+    setUpGameRedeclarationEvent();
+    setupTournamentFinishedEvent();
     setUpFocusTracker();
 }
 

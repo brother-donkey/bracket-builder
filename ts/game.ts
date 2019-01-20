@@ -102,6 +102,12 @@ export class Game implements IGame {
                 "detail": this
             });
 
+            const winnerDeclaredEvent = new CustomEvent('WinnerDeclaredEvent', {
+                "detail": this
+            });
+
+            window.dispatchEvent(winnerDeclaredEvent);
+
             window.dispatchEvent(tournamentFinishedEvent);
 
             return this.winner;
