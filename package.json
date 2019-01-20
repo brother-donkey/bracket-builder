@@ -11,12 +11,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cssnano": "^4.1.7",
+    "cssnano": "^4.1.8",
     "posthtml": "^0.11.3",
-    "posthtml-cli": "^0.4.7",
+    "posthtml-cli": "^0.4.8",
     "posthtml-include": "^1.2.0",
     "posthtml-md": "^1.1.0",
-    "sass": "^1.14.1",
-    "typescript": "^3.1.1"
+    "sass": "^1.16.1",
+    "typescript": "^3.2.4"
   }
 }
