@@ -1,3 +1,4 @@
+
 export function getNumberOfGames(num: number): number {
     let numberOfGames = 0;
     num /= 2;
