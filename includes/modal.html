@@ -1,20 +1,21 @@
-<section class="modal">
+<section class="modal exit-parent" hidden>
     <div class="header">
-        <h2 class="header-title">Header title</h2>
+        <h2 class="header-title">Are you sure you want to proceed?</h2>
     </div>
-    <button class="modal-exit fas fa-times"></button>
+    <button class="modal-exit exit fas fa-times"></button>
     <div class="content">
         <p class="explanation">Explanation of stuff here.</p>
 
     </div>
     <div class="footer is-paddingless">
-        <button class="nevermind">
+        <button class="cancel exit">
             <span>Cancel</span>
             <i class="fas fa-thumbs-down"></i>
         </button>
-        <button class="accept">
-            <i class="fas fa-thumbs-up"></i>
+        <button class="confirm exit">
             <span>Confirm</span>
+            <i class="fas fa-thumbs-up"></i>
         </button>
     </div>
 </section>
+<div class="modal-overlay"></div>
