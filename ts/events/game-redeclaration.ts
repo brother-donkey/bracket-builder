@@ -14,7 +14,7 @@ export function setUpGameRedeclarationEvent() {
 
 export function resetParentGamesStatuses(game: IGame) {
     let isFirstGame = true;
-    const previousWinner = game.winner.name;
+    const previousWinner = game.loser.name;
 
     while (game) {
         // reset the games upcoming
@@ -41,12 +41,10 @@ export function resetParentGamesStatuses(game: IGame) {
             }
         }
 
-
         const players = Array.from(gameElt.querySelectorAll(`#game-${game.id} .player`)) as HTMLElement[];
         const icons = Array.from(gameElt.querySelectorAll('fas')) as HTMLElement[];
 
         const finishGame = gameElt.querySelector('.finish-game');
-
 
         if (finishGame) {
             finishGame.innerHTML = '<span class="chevron" aria-hidden="true"></span>';

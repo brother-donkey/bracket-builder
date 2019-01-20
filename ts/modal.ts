@@ -60,8 +60,7 @@ export async function setUpModalEvents() {
 
     function handleModalExit(e: Event) {
         const target = e.target as HTMLElement;
-        if (target.classList.contains('exit')) {
-            // debugger;
+        if (target.classList.contains('exit') || target.closest('.exit')) {
             const modal = target.closest('.exit-parent') as HTMLElement;
             if (!modal) {
                 return;
