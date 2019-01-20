@@ -1,3 +1,4 @@
+import { awaitModalConfirmation, populateModalContent, redeclarationModalConfig, showModal } from "./modal";
 import { resetRecordOnRedeclaredGame } from "./reset";
 import { IFinalScore, IGame, IPlayer } from "./types";
 
@@ -29,19 +30,28 @@ export class Game implements IGame {
     losingScore: number;
     winningScore: number;
 
-    declareWinner = (winner: IPlayer, score: [number, number]) => {
+    redeclareGame = async (winner: IPlayer, score: [number, number]) => {
 
         if (this.finished && winner.name !== this.winner.name) {
 
-            const userInput = prompt(`This game was already finished. This will reset all parent games. Are you sure you want to redo it? ('Yes' to continue.)`);
+            resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, true, this.winningScore, this.losingScore);
 
-            if (userInput.toLowerCase() === 'yes') {
-                resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, true, this.winningScore, this.losingScore);
+            const warningModal = await populateModalContent(redeclarationModalConfig);
+            showModal(warningModal);
+
+            awaitModalConfirmation(warningModal, () => {
+
                 window.dispatchEvent(new CustomEvent('GameRedeclarationEvent', {
                     detail: this
                 }));
-            }
 
+                // runs when we click 'accept
+                this.finished = false;
+                // reset their status 
+                // their UI
+
+                this.declareWinner(winner, score);
+            });
         }
 
         if (this.finished && winner.name === this.winner.name) {
@@ -52,6 +62,14 @@ export class Game implements IGame {
             const previousLosingScore = this.score[0] > this.score[1] ? this.score[1] : this.score[0];
 
             resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, false, previousWinningScore, previousLosingScore);
+            return;
+        }
+    }
+
+    declareWinner = (winner: IPlayer, score: [number, number]) => {
+
+        if (this.finished) {
+            this.redeclareGame(winner, score);
         }
 
         this.finished = true;

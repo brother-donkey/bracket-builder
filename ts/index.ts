@@ -3,6 +3,7 @@ import { setUpFocusTracker, setUpGameFinishModalEvent, setupStartTournamentButto
 import { setUpGameRedeclarationEvent } from "./events/game-redeclaration";
 import { setUpExitButtons } from "./exit-button";
 import { mockFamily } from "./mocks";
+import { setUpModalEvents } from "./modal";
 import { Player } from "./player";
 import { handlePlayerInput, SimplePlayer } from './player-input';
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
@@ -19,6 +20,7 @@ setUpExitButtons();
 handleMockData();
 handlePlayerInput();
 setupStartTournamentButtonClick();
+setUpModalEvents();
 
 export function convertSimplePlayersToFull(simplePlayers: SimplePlayer[]): IPlayer[] {
     return simplePlayers.map(player => new Player(player.name, player.seed));
