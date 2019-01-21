@@ -8,6 +8,7 @@ import { setUpModalEvents } from "./modal";
 import { Player } from "./player";
 import { handlePlayerInput, SimplePlayer } from './player-input';
 import { createRoundContainers, getNumberOfRounds } from "./rounds";
+import { setupSettingsToggle } from "./settings";
 import { addByes, assignParentGames, createBracket, createGame, flattenGames, renderGamesInRoundContainers } from "./setup";
 import { IGame, IPlayer } from "./types";
 
@@ -52,6 +53,7 @@ export async function startTournament(e: CustomEvent) {
     setUpGameRedeclarationEvent();
     setupTournamentFinishedEvent();
     setUpFocusTracker();
+    setupSettingsToggle();
 }
 
 function createTournamentStructure(playersWithoutByes: SimplePlayer[]): { numberOfRounds: number; tourney: IGame } {

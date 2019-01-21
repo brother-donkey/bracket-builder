@@ -4,6 +4,7 @@
     color: $white;
     display: flex;
     position: relative;
+    z-index: 1;
     
     .header-icon {
         font-size: 3rem;
