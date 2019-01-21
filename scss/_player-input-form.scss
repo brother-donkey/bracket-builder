@@ -96,6 +96,10 @@
 .instructions-list {
     margin: 0 1rem;
     font-size: .8rem;
+
+    li { 
+        margin-top: .25rem;
+    }
 }
 
 #player-input-directions {
