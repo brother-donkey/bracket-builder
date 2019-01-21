@@ -3,10 +3,14 @@
     <form id="player-input-form" hidden>
         <div id="player-input-directions">
             <h2>Input tournament roster</h2>
-            <p>Add players to your tournament by writing their names and seeds in the inputs below. Seeds can be
-                omitted. You need <strong>at least six players</strong> to start a tournament. Select "Start
-                Tournament" when all
-                players have been added.</p>
+            <ol class="instructions-list">
+                <li>Give your tournament a name!</li>
+                <li>Add players to your tournament. (Seeds are optional.)</li>
+                <li>When you're all set, select Start Tournament</li>
+            </ol>
+        </div>
+        <div class="tournament-name-container">
+            <input class="input tournament-name" type="text" name="size" placeholder="My Tournament Name">
         </div>
         <div class="form-player-container">
             <div class="form-player-input-container">
