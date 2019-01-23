@@ -12,7 +12,6 @@ export const tournamentRoster = document.getElementById('player-input-added-play
 
 playerInputForm.addEventListener('submit', e => {
     e.preventDefault();
-    // window.dispatchEvent(new CustomEvent('StartTournament'));
 });
 
 export async function handlePlayerInput() {

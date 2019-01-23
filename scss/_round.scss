@@ -6,8 +6,6 @@
     align-items: center;
     justify-content: center;
     margin: .5rem;
-    padding-top: 1.5rem;
-    // position: relative;
 
     @for $i from 1 through 10 {
         
@@ -18,19 +16,17 @@
     }
 
     header.round-label {
-        // position: absolute;
-        // top: 0; 
-        // right: 0;
-        // left: 0;
-        // height: 1.5rem;
         color: $white;
     }
+}
+
+[data-round-number] {
+    font-size: 20px;
 }
 
 [data-round-number="1"] {
     font-size: 14px;
 }
-
 
 [data-round-number="2"] {
     font-size: 16px;
@@ -38,12 +34,4 @@
 
 [data-round-number="3"] {
     font-size: 18px;
-}
-
-[data-round-number="4"] {
-    font-size: 20px;
-}
-
-[data-round-number="5"] {
-    font-size: 20px;
 }

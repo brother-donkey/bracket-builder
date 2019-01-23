@@ -186,8 +186,12 @@ export function setupStartTournamentButtonClick() {
 
             const text = document.getElementById('start-tourament-icon');
             const background = document.getElementById('start-tournament-background');
+            const tournamentNameElt = document.getElementById('tournament-name') as HTMLInputElement;
+            const tournamentName = tournamentNameElt.value ? tournamentNameElt.value : 'Our bracket';
 
             if (text && background) {
+                showTournamentHeadline(tournamentName);
+
                 text.classList.add('tournament-animation-icon');
                 background.classList.add('fullscreen-tournament-animation-background');
                 hideInputForm();
@@ -202,4 +206,10 @@ export function setupStartTournamentButtonClick() {
 
 export function hideInputForm() {
     document.getElementById('player-input-form').style.display = 'none';
+}
+
+export function showTournamentHeadline(name: string) {
+    const elt = document.getElementById('tournament-name-heading') as HTMLElement;
+    elt.textContent = name;
+    elt.parentElement.style.display = 'block';
 }
