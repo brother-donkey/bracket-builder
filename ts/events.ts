@@ -58,7 +58,10 @@ export function setUpWinnerDeclaredEventListener(games) {
         finishGameButton.innerHTML = buttonScoreHTML;
         finishGameButton.classList.add('scored');
 
-        populateParentGame(finishedGame, parent);
+        if (parent) {
+            // * if the tournament isn't over
+            populateParentGame(finishedGame, parent);
+        }
     });
 }
 

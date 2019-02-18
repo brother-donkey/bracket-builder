@@ -43,12 +43,13 @@
 }
 
 .tournament-name-container {
-    margin-bottom: 0 !important;
+    margin-bottom: .5rem;
 }
 
 .form-player-input-container,
 .tournament-name-container {
     flex: 5 1 70%;
+
     .input.name {
         padding: .5em;
         width: 100%;

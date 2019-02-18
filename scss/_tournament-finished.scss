@@ -1,0 +1,89 @@
+.tournament-finished-animated-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: $blue;
+    color: $white;
+    z-index: 20;
+}
+
+.t-f-container {
+     position: relative;
+    height: 100%;
+    width: 100%;
+   
+}
+
+.t-f-animated-star {
+    margin: 0;
+}
+
+.t-f-animation-container {
+    margin: 0;
+}
+
+.t-f-summary-container {
+    margin: .5rem auto;
+    border: 1px solid $white;
+
+    @media screen and (min-width: 768px) {
+        width: 70%;
+    }
+}
+
+.t-f-animation {
+    position: absolute;
+    width: 300px;
+    left: calc(50% - 150px);
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: center;
+}
+
+.fa-star {
+    color: gold;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+}
+
+.congrats-winner {
+    width: 100%;
+    font-size: 2.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.congrats {
+    margin-bottom: 1rem;
+}
+.congrats-winner {
+    
+}
+
+@keyframes spinTwice {
+    20% {
+        opacity: 1;
+        transform: rotate(180deg);
+    }
+
+    60% {
+        opacity: 1;
+        transform: rotate(520deg) scale(1.5);
+    }
+
+    100% {
+        transform: rotate(720deg) scale(1);
+        opacity: 1;
+    }
+}
+
+.spin-twice {
+    animation: spinTwice 1s linear 0s 1 forwards;
+}
