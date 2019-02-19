@@ -1,4 +1,4 @@
-.tournament-finished-animated-overlay {
+#tournament-finished-animated-overlay {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -7,13 +7,19 @@
     background: $blue;
     color: $white;
     z-index: 20;
+
+
+    .fa-star {
+        color: gold;
+        font-size: 5rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .t-f-container {
      position: relative;
     height: 100%;
     width: 100%;
-   
 }
 
 .t-f-animated-star {
@@ -37,19 +43,13 @@
     position: absolute;
     width: 300px;
     left: calc(50% - 150px);
-    top: 50px;
+    top: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
     transform-origin: center;
 }
 
-.fa-star {
-    color: gold;
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    opacity: 0;
-}
 
 .congrats-winner {
     width: 100%;
@@ -58,32 +58,59 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: 0; // animation should make it 1
+    transform: translateY(125px);
+
+    @media screen and (max-width: 767px) {
+        font-size: 1.5rem;
+    }
 }
 
 .congrats {
     margin-bottom: 1rem;
 }
-.congrats-winner {
-    
+
+.congrats-winner-name {
+    font-weight: bold;
 }
 
-@keyframes spinTwice {
-    20% {
-        opacity: 1;
-        transform: rotate(180deg);
-    }
-
+@keyframes pop {
     60% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pop-once {
+    animation-name: pop;
+    animation-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes appearFromBottom {
+    80% {
         opacity: 1;
-        transform: rotate(520deg) scale(1.5);
     }
 
     100% {
-        transform: rotate(720deg) scale(1);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.spin-twice {
-    animation: spinTwice 1s linear 0s 1 forwards;
+.appear-from-bottom {
+    animation-name: appearFromBottom;
+    animation-timing-function: cubic-bezier(.68,-0.55,.27,1);
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+.html-contrained-to-screen-height {
+    // add via javascript
+    max-height: 100vh;
 }
