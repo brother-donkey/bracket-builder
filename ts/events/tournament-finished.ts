@@ -12,7 +12,7 @@ export function setupTournamentFinishedEvent() {
 
 export function renderTournamentResults(container: HTMLElement, game: IGame): HTMLElement {
     const winnerNameElt = container.querySelector('.congrats-winner-name') as HTMLElement;
-    winnerNameElt.textContent = game.winner.name;
+    winnerNameElt.textContent = `${game.winner.name}!`;
 
     container.hidden = false;
     const star = container.querySelector('.fas.fa-star') as HTMLSpanElement;
