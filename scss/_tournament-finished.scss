@@ -114,3 +114,27 @@
     // add via javascript
     max-height: 100vh;
 }
+
+.button.show-results {
+    opacity: 0;
+    color: $yellow;
+    margin: 30px auto 10px;
+    background: transparent;
+    border: 1px solid $yellow;
+}
+
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation-name: fadeIn;
+    animation-timing-function: cubic-bezier(.68,-0.55,.27,1);
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}

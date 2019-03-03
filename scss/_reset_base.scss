@@ -104,6 +104,7 @@ th {
   text-align: left;
 }
 
-[hidden] {
+[hidden], 
+[hidden] * {
   display: none !important;
 }
