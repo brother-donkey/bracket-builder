@@ -1,12 +1,14 @@
+import { currentPlayers } from "..";
 import { IGame, IPlayer } from "../types";
 
-export function setupTournamentFinishedEvent(players: IPlayer[]) {
+export function setupTournamentFinishedEvent() {
     window.addEventListener('TournamentFinishedEvent', (e: CustomEvent) => {
         const finishedGame = e.detail as IGame;
         console.log(finishedGame);
         console.log('We are done here.');
+        console.log({ currentPlayers });
         const overlay = document.getElementById('tournament-finished-animated-overlay') as HTMLElement;
-        renderTournamentResults(overlay, finishedGame, players);
+        renderTournamentResults(overlay, finishedGame, currentPlayers);
     });
 }
 
@@ -114,4 +116,3 @@ function getInsertionElement(tableElement: HTMLTableElement): HTMLElement {
     const body = tableElement.querySelector('tbody');
     return body || tableElement;
 }
-

@@ -24,6 +24,8 @@ handlePlayerInput();
 setupStartTournamentButtonClick();
 setUpModalEvents();
 
+export let currentPlayers = [];
+
 export function convertSimplePlayersToFull(simplePlayers: SimplePlayer[]): IPlayer[] {
     return simplePlayers.map(player => new Player(player.name, player.seed));
 }
@@ -36,6 +38,7 @@ export async function startTournament(e: CustomEvent) {
 
     // create tourney structure - later refactor into init initBracket function player[] => IGame tournament
     const { numberOfRounds, tourney, players } = createTournamentStructure(playersWithoutByes); // recursively creates all games
+    currentPlayers = players || [];
 
     const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
 
@@ -51,7 +54,7 @@ export async function startTournament(e: CustomEvent) {
     setupWinnerDeclaredEvent(games);
     setUpWinnerDeclaredEventListener(games);
     setUpGameRedeclarationEvent();
-    setupTournamentFinishedEvent(players);
+    setupTournamentFinishedEvent();
     setUpFocusTracker();
     setupSettingsToggle();
 }

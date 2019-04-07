@@ -1,5 +1,5 @@
 import { Game } from "./game";
-import { Player, TBAPlayer } from "./player";
+import { TBAPlayer } from "./player";
 import { SimplePlayer } from "./player-input";
 import { gameReadyToPlay } from "./render";
 import { BracketItem, IGame, IPlayer } from "./types";
@@ -46,8 +46,8 @@ export function createGame(bracket: BracketItem, round: number): IGame {
         const player2 = bracket[1] as IPlayer;
 
         return new Game(
-            new Player(player1.name, player1.seed),
-            new Player(player2.name, player2.seed),
+            player1,
+            player2,
             [],
             gameId += 1,
             round

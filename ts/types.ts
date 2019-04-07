@@ -4,6 +4,7 @@ export interface IPlayer {
     seed: number;
     record: IRecord;
     isBye: boolean;
+    id: string;
 }
 
 export interface ITBAPlayer {

@@ -1,3 +1,4 @@
+import { currentPlayers } from ".";
 import { awaitModalConfirmation, populateModalContent, redeclarationModalConfig, showModal } from "./modal";
 import { resetRecordOnRedeclaredGame } from "./reset";
 import { IFinalScore, IGame, IPlayer } from "./types";
@@ -67,7 +68,7 @@ export class Game implements IGame {
     }
 
     declareWinner = (winner: IPlayer, score: [number, number]) => {
-
+        debugger;
         if (this.finished) {
             this.redeclareGame(winner, score);
         }
@@ -83,21 +84,25 @@ export class Game implements IGame {
 
         this.winner = winner;
         this.loser = this.winner === this.player1 ? this.player2 : this.player1;
-        this.winningScore = winningScore;
-        this.losingScore = losingScore;
 
-        const pointDifference = Math.abs(score[0] - score[1]);
+        if (!this.loser.isBye) {
+            this.winningScore = winningScore;
+            this.losingScore = losingScore;
 
-        this.winner.record.playersBeaten.push(this.loser.name)
-        this.winner.record.wins++;
-        this.winner.record.pointDifferential += pointDifference;
+            const pointDifference = Math.abs(score[0] - score[1]);
 
-        this.loser.record.losses++;
-        this.loser.record.playersLostTo.push(this.winner.name);
-        this.loser.record.pointDifferential -= pointDifference;
+            this.winner.record.playersBeaten.push(this.loser.name)
+            this.winner.record.wins++;
+            this.winner.record.pointDifferential += pointDifference;
+
+            this.loser.record.losses++;
+            this.loser.record.playersLostTo.push(this.winner.name);
+            this.loser.record.pointDifferential -= pointDifference;
+        }
 
         // check for the end of the tournament
         if (!this.parent) {
+            debugger;
             const tournamentFinishedEvent = new CustomEvent('TournamentFinishedEvent', {
                 "detail": this
             });
@@ -112,6 +117,8 @@ export class Game implements IGame {
 
             return this.winner;
         }
+
+        updatePlayerRecords([this.winner, this.loser]);
 
         // otherwise mark the game's winner
         const winnerDeclaredEvent = new CustomEvent('WinnerDeclaredEvent', {
@@ -129,4 +136,13 @@ export class Game implements IGame {
         window.dispatchEvent(winnerDeclaredEvent);
         return this.winner;
     }
+}
+
+export function updatePlayerRecords(playersToUpdate: IPlayer[]) {
+    debugger;
+    playersToUpdate.forEach(player => {
+        debugger;
+        const playerIndex = currentPlayers.findIndex(item => item.id === player.id);
+        currentPlayers[playerIndex] = player;
+    });
 }
