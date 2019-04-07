@@ -58,6 +58,21 @@ export function renderTournamentSummary(tournament: IGame, players: IPlayer[]) {
     tournamentElement.insertAdjacentElement('beforebegin', tableWrapper);
     addTournamentFinishedTableHeaders(tableElement);
     generatePlayerTableData(playersWithoutByes, tableElement);
+    scrollToElement(tableWrapper);
+}
+
+export function scrollToElement(element: HTMLElement) {
+    if (!element) {
+        return;
+    }
+    const position = element.getBoundingClientRect().top;
+    try {
+        window.scrollTo({ top: position, behavior: 'smooth' });
+    }
+    catch (e) {
+        window.scrollTo(0, position);
+        console.log(e);
+    }
 }
 
 export function addTournamentFinishedTableHeaders(tableElement: HTMLTableElement) {
