@@ -187,6 +187,8 @@ export function setupStartTournamentButtonClick() {
         if (target.id === 'start-tournament') {
             e.preventDefault();
 
+            const tourneyElt = document.getElementById('tourney');
+            tourneyElt.classList.remove('is-inactive');
             const text = document.getElementById('start-tourament-icon');
             const background = document.getElementById('start-tournament-background');
             const tournamentNameElt = document.getElementById('tournament-name') as HTMLInputElement;
