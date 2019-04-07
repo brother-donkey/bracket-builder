@@ -35,7 +35,7 @@ export async function startTournament(e: CustomEvent) {
     const playersWithoutByes = useMockPlayers ? mockPlayers : e.detail as SimplePlayer[];
 
     // create tourney structure - later refactor into init initBracket function player[] => IGame tournament
-    const { numberOfRounds, tourney } = createTournamentStructure(playersWithoutByes); // recursively creates all games
+    const { numberOfRounds, tourney, players } = createTournamentStructure(playersWithoutByes); // recursively creates all games
 
     const tourneyElt = document.getElementById('tourney') as HTMLMainElement;
 
@@ -51,18 +51,18 @@ export async function startTournament(e: CustomEvent) {
     setupWinnerDeclaredEvent(games);
     setUpWinnerDeclaredEventListener(games);
     setUpGameRedeclarationEvent();
-    setupTournamentFinishedEvent();
+    setupTournamentFinishedEvent(players);
     setUpFocusTracker();
     setupSettingsToggle();
 }
 
-function createTournamentStructure(playersWithoutByes: SimplePlayer[]): { numberOfRounds: number; tourney: IGame } {
+function createTournamentStructure(playersWithoutByes: SimplePlayer[]): { numberOfRounds: number; tourney: IGame; players: IPlayer[] } {
     const playersWithBys = addByes(playersWithoutByes);
     const players = convertSimplePlayersToFull(playersWithBys);
     const numberOfRounds = getNumberOfRounds(players.length);
     const baseBracket = createBracket(players);
     const tourney = createGame(baseBracket, numberOfRounds); // recursively creates all games
-    return { numberOfRounds, tourney };
+    return { numberOfRounds, tourney, players };
 }
 
 function handleMockData() {
