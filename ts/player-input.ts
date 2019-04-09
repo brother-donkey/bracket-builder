@@ -31,8 +31,9 @@ export async function handlePlayerInput() {
         const playerSeed = playerField.querySelector('input.seed') as HTMLInputElement;
 
         if (playerName.value !== '' && playerName.value !== undefined && playerName.value !== null) {
+            const name = playerName.value;
             inputPlayers.push({
-                name: playerName.value,
+                name,
                 seed: parseInt(playerSeed.value)
             });
             playerName.value = '';
@@ -60,13 +61,13 @@ export async function handlePlayerInput() {
 export function updateRoster(players: SimplePlayer[]) {
 
     const playerHTML = players.map(player => {
-
+        const escapedName = player.name.split(' ').map(n => escape(n)).join(' ');
         return `
         <div class="player" data-player-name="player-1" data-player-by="false">
-            <span class="seed is-higher" >${isNaN(player.seed) || player.seed === 0 ? "?" : player.seed}</span><span class="player-name">${player.name}</span >
+            <span class="seed is-higher" >${isNaN(player.seed) || player.seed === 0 ? "?" : player.seed}</span><span class="player-name">${escapedName}</span >
         </div>`;
     }).join('');
 
-    tournamentRoster.innerHTML = `${playerHTML}`
+    tournamentRoster.innerHTML = `${playerHTML}`;
 }
 
