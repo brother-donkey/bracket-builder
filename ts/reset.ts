@@ -1,3 +1,5 @@
+import { IPlayer } from "./types";
+
 export function removeStarOrSkull(container: HTMLElement): HTMLElement {
     const star = container.querySelector('.fa-star');
     const skull = container.querySelector('.fa-skull');
@@ -18,7 +20,7 @@ export function resetRecordOnRedeclaredGame(previousWinner: IPlayer, player1: IP
     let loser = previousWinner.name === player1.name ? player2 : player1;
 
     const differential = previousWinningScore - previousLosingScore;
-
+    debugger;
     if (winnerChanged) {
         // switch the reference if the winner changed is passed in
         winner = previousWinner.name === player1.name ? player2 : player1;
@@ -36,6 +38,18 @@ export function resetRecordOnRedeclaredGame(previousWinner: IPlayer, player1: IP
         loser.record.playersBeaten.splice(lI, 1);
         return;
     }
+
+    winner.record.wins--;
+    loser.record.losses--;
+
+    winner.record.pointDifferential -= differential;
+    loser.record.pointDifferential += differential;
+
+    const wI = winner.record.playersBeaten.findIndex(p => p === loser.name);
+    winner.record.playersBeaten.splice(wI, 1);
+
+    const lI = loser.record.playersLostTo.findIndex(p => p === winner.name);
+    loser.record.playersLostTo.splice(lI, 1);
 
     winner.record.pointDifferential -= differential;
     loser.record.pointDifferential += differential;

@@ -58,9 +58,9 @@ export class Game implements IGame {
         if (this.finished && winner.name === this.winner.name) {
             // the score has been updated but the winner is the same, might not be worth bothering with this branch
             // recalculate points differential either way
-
-            const previousWinningScore = this.score[0] > this.score[1] ? this.score[0] : this.score[1];
-            const previousLosingScore = this.score[0] > this.score[1] ? this.score[1] : this.score[0];
+            debugger;
+            const previousWinningScore = this.winningScore;
+            const previousLosingScore = this.losingScore;
 
             resetRecordOnRedeclaredGame(this.winner, this.player1, this.player2, false, previousWinningScore, previousLosingScore);
             return;
@@ -68,7 +68,7 @@ export class Game implements IGame {
     }
 
     declareWinner = (winner: IPlayer, score: [number, number]) => {
-        debugger;
+
         if (this.finished) {
             this.redeclareGame(winner, score);
         }
@@ -102,7 +102,6 @@ export class Game implements IGame {
 
         // check for the end of the tournament
         if (!this.parent) {
-            debugger;
             const tournamentFinishedEvent = new CustomEvent('TournamentFinishedEvent', {
                 "detail": this
             });
@@ -139,9 +138,7 @@ export class Game implements IGame {
 }
 
 export function updatePlayerRecords(playersToUpdate: IPlayer[]) {
-    debugger;
     playersToUpdate.forEach(player => {
-        debugger;
         const playerIndex = currentPlayers.findIndex(item => item.id === player.id);
         currentPlayers[playerIndex] = player;
     });
