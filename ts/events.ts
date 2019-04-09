@@ -42,10 +42,16 @@ export function setUpWinnerDeclaredEventListener(games) {
 
         winnerElt.classList.remove('loser');
         winnerElt.classList.add('winner');
-        addResultIcon(winnerElt, true);
+
         loserElt.classList.remove('winner');
         loserElt.classList.add('loser');
-        addResultIcon(loserElt, false);
+
+        if (!winnerElt.querySelector('.fa-star')) {
+            addResultIcon(winnerElt, true);
+        }
+        if (!loserElt.querySelector('.fa-skull')) {
+            addResultIcon(loserElt, false);
+        }
 
         const determineWhichIsFirstInDom = elt.querySelector('.winner + .loser');
         const winnerIsFirst = determineWhichIsFirstInDom !== null;

@@ -88,8 +88,8 @@ export function addTournamentFinishedTableHeaders(tableElement: HTMLTableElement
             <th>Wins</th>
             <th>Losses</th>
             <th>Point Diff</th>
-            <th>Beaten by</th>
-            <th>Defeated by</th>
+            <th>Defeated</th>
+            <th>Lost to</th>
         </tr>
     `);
 }
