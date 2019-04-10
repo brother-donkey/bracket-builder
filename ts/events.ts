@@ -99,7 +99,10 @@ export function setupWinnerDeclaredInModalEvent(games: IGame[]) {
                 return;
             }
 
-            if (!firstPlayerScore || !secondPlayerScore) {
+            const firstPlayerNoInput = firstPlayerScore !== 0 && !firstPlayerScore;
+            const secondPlayerNoInput = secondPlayerScore !== 0 && !secondPlayerScore;
+
+            if (firstPlayerNoInput || secondPlayerNoInput) {
                 alert("You didn't fill out one of the scores.");
                 return;
             }
