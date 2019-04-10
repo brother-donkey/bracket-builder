@@ -13,7 +13,7 @@ import { addByes, assignParentGames, createBracket, createGame, flattenGames, re
 import { IGame, IPlayer } from "./types";
 
 export const players = [];
-export const useMockPlayers: boolean = true;
+export const useMockPlayers: boolean = false;
 export const mockPlayers = mockFamily;
 
 window.addEventListener('StartTournament', startTournament);
