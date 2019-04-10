@@ -1,7 +1,7 @@
 import { contentLoaded } from "./dom";
-import { setUpFocusTracker, setUpGameFinishModalEvent, setupStartTournamentButtonClick, setupWinnerDeclaredEvent, setUpWinnerDeclaredEventListener } from "./events";
+import { setUpFocusTracker, setUpGameFinishModalEvent, setupStartTournamentButtonClick, setUpWinnerDeclaredEventListener, setupWinnerDeclaredInModalEvent } from "./events";
 import { setUpGameRedeclarationEvent } from "./events/game-redeclaration";
-import { setupTournamentFinishedEvent } from "./events/tournament-finished";
+import { setUpTheTournamentIsOverLosers, setupTournamentFinishedEvent } from "./events/tournament-finished";
 import { setUpExitButtons } from "./exit-button";
 import { mockFamily } from "./mocks";
 import { setUpModalEvents } from "./modal";
@@ -51,12 +51,13 @@ export async function startTournament(e: CustomEvent) {
 
     // Event setup
     setUpGameFinishModalEvent(games);
-    setupWinnerDeclaredEvent(games);
+    setupWinnerDeclaredInModalEvent(games);
     setUpWinnerDeclaredEventListener(games);
     setUpGameRedeclarationEvent();
     setupTournamentFinishedEvent();
     setUpFocusTracker();
     setupSettingsToggle();
+    setUpTheTournamentIsOverLosers();
 }
 
 function createTournamentStructure(playersWithoutByes: SimplePlayer[]): { numberOfRounds: number; tourney: IGame; players: IPlayer[] } {

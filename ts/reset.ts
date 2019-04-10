@@ -20,7 +20,6 @@ export function resetRecordOnRedeclaredGame(previousWinner: IPlayer, player1: IP
     let loser = previousWinner.name === player1.name ? player2 : player1;
 
     const differential = previousWinningScore - previousLosingScore;
-    debugger;
     if (winnerChanged) {
         // switch the reference if the winner changed is passed in
         winner = previousWinner.name === player1.name ? player2 : player1;

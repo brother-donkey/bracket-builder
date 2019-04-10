@@ -1,6 +1,13 @@
 import { currentPlayers } from "..";
 import { IGame, IPlayer } from "../types";
 
+export function setUpTheTournamentIsOverLosers() {
+    window.addEventListener('TournamentFinishedEvent', () => {
+        const elts = Array.from(document.querySelectorAll('.ready')) as HTMLElement[];
+        elts.forEach(elt => elt.classList.remove('ready'));
+    });
+}
+
 export function setupTournamentFinishedEvent() {
     window.addEventListener('TournamentFinishedEvent', (e: CustomEvent) => {
         const finishedGame = e.detail as IGame;

@@ -58,7 +58,6 @@ export class Game implements IGame {
         if (this.finished && winner.name === this.winner.name) {
             // the score has been updated but the winner is the same, might not be worth bothering with this branch
             // recalculate points differential either way
-            debugger;
             const previousWinningScore = this.winningScore;
             const previousLosingScore = this.losingScore;
 

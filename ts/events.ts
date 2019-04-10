@@ -31,44 +31,38 @@ export function setUpGameFinishModalEvent(games: IGame[]) {
     });
 }
 
-export function setUpWinnerDeclaredEventListener(games) {
-    window.addEventListener('WinnerDeclaredEvent', (e: CustomEvent) => {
-        const { detail: finishedGame } = e;
-        const { id, winner, loser, score, parent } = finishedGame as IGame;
-        const elt = findGameElement(id);
-        const finishGameButton = elt.querySelector('.finish-game');
-        const winnerElt = findPlayerElement(elt, winner);
-        const loserElt = findPlayerElement(elt, loser);
-
-        winnerElt.classList.remove('loser');
-        winnerElt.classList.add('winner');
-
-        loserElt.classList.remove('winner');
-        loserElt.classList.add('loser');
-
-        if (!winnerElt.querySelector('.fa-star')) {
-            addResultIcon(winnerElt, true);
-        }
-        if (!loserElt.querySelector('.fa-skull')) {
-            addResultIcon(loserElt, false);
-        }
-
-        const determineWhichIsFirstInDom = elt.querySelector('.winner + .loser');
-        const winnerIsFirst = determineWhichIsFirstInDom !== null;
-
-        const buttonScoreHTML = `
+const handleWinnerDeclaredEvent = (e: CustomEvent) => {
+    const { detail: finishedGame } = e;
+    const { id, winner, loser, score, parent } = finishedGame as IGame;
+    const elt = findGameElement(id);
+    const finishGameButton = elt.querySelector('.finish-game');
+    const winnerElt = findPlayerElement(elt, winner);
+    const loserElt = findPlayerElement(elt, loser);
+    winnerElt.classList.remove('loser');
+    winnerElt.classList.add('winner');
+    loserElt.classList.remove('winner');
+    loserElt.classList.add('loser');
+    if (!winnerElt.querySelector('.fa-star')) {
+        addResultIcon(winnerElt, true);
+    }
+    if (!loserElt.querySelector('.fa-skull')) {
+        addResultIcon(loserElt, false);
+    }
+    const determineWhichIsFirstInDom = elt.querySelector('.winner + .loser');
+    const winnerIsFirst = determineWhichIsFirstInDom !== null;
+    const buttonScoreHTML = `
             ${winnerIsFirst ? `<div class="scored-winner"><span>${score.winningScore}</span></div>` : `<div class="scored-loser"><span>${score.losingScore}</span></div>`}
             ${winnerIsFirst ? `<div class="scored-loser"><span>${score.losingScore}</span></div>` : `<div class="scored-winner"><span>${score.winningScore}</span></div>`}
-        `
-
-        finishGameButton.innerHTML = buttonScoreHTML;
-        finishGameButton.classList.add('scored');
-
-        if (parent) {
-            // * if the tournament isn't over
-            populateParentGame(finishedGame, parent);
-        }
-    });
+        `;
+    finishGameButton.innerHTML = buttonScoreHTML;
+    finishGameButton.classList.add('scored');
+    if (parent) {
+        // * if the tournament isn't over
+        populateParentGame(finishedGame, parent);
+    }
+};
+export function setUpWinnerDeclaredEventListener(games) {
+    window.addEventListener('WinnerDeclaredEvent', handleWinnerDeclaredEvent);
 }
 
 export function findGameElement(id: number): HTMLElement {
@@ -81,7 +75,7 @@ export function findPlayerElement(container: HTMLElement, player: IPlayer): HTML
 
 // deals with how form submission of a score
 
-export function setupWinnerDeclaredEvent(games: IGame[]) {
+export function setupWinnerDeclaredInModalEvent(games: IGame[]) {
     window.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
         if (target && target.classList.contains('submit-game-button')) {
@@ -172,8 +166,11 @@ export function gameElementIsReadyToPlay(gameElt: HTMLElement, playerElts: HTMLE
 export function setUpFocusTracker() {
     window.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
-
-        if (target.classList.contains('finish-game') || target.closest('.finish-game')) {
+        const closest = target.closest('.finish-game');
+        if (closest) {
+            if ((closest as HTMLButtonElement).disabled === true) {
+                return;
+            }
             const lastFocused = document.querySelector(`[data-last-focused-game="true"]`) as HTMLElement;
             if (lastFocused) {
                 lastFocused.dataset.lastFocusedGame = "false";

@@ -1,6 +1,9 @@
 :disabled {
-    opacity: .5;
     cursor: not-allowed; 
+}
+
+#start-tournament:disabled {
+    opacity: .5;
 }
 
 .form-container {
@@ -145,7 +148,7 @@
     max-width: 100%;
     padding: 1rem;
     color: $white;
-    border: 3px solid $green;
+    border: 3px solid $blue;
     border-radius: 10px;
 
     tr {
