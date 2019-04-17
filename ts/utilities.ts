@@ -18,10 +18,8 @@ export function constrainFocusToContainer(selector: string) {
 
 export function constrainFocus(selector: string): (this: Window, ev: FocusEvent) => any {
     return (e: Event) => {
-        // console.log(e);
         const target = e.target as HTMLElement;
         if (target instanceof HTMLElement && target.closest(selector)) {
-            console.log('n')
             return;
         }
         // console.log('o');
