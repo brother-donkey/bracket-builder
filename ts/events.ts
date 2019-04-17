@@ -1,6 +1,9 @@
 import { inputPlayers } from "./player-input";
 import { addResultIcon } from "./setup";
 import { IGame, IPlayer } from "./types";
+import { constrainFocus } from "./utilities";
+
+const formSelector = '#submit-game';
 
 export function setUpGameFinishModalEvent(games: IGame[]) {
     window.addEventListener('click', e => {
@@ -10,6 +13,7 @@ export function setUpGameFinishModalEvent(games: IGame[]) {
 
         if (gameElt && gameElt.classList.contains('ready')) {
             e.preventDefault();
+
             const [match] = games.filter(game => game.id.toString() === gameElt.dataset.gameId);
             formContainer.hidden = false;
 
@@ -27,6 +31,7 @@ export function setUpGameFinishModalEvent(games: IGame[]) {
             firstPlayerScore.value = undefined;
             secondPlayerScore.value = undefined;
             secondPlayerScore.focus(); // because I'm a fool, I've put the second one first.
+            window.addEventListener('focusin', constrainFocus(formSelector))
         }
     });
 }
@@ -119,6 +124,7 @@ export function setupWinnerDeclaredInModalEvent(games: IGame[]) {
             const formContainer = document.querySelector('.form-container') as HTMLElement;
             formContainer.hidden = true;
             const lastClickedGame = document.querySelector('[data-last-focused-game="true"]') as HTMLElement;
+            window.removeEventListener('focusin', constrainFocus(formSelector));
             if (lastClickedGame) {
                 lastClickedGame.focus();
             }
