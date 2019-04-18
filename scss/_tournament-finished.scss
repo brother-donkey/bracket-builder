@@ -121,6 +121,11 @@
     margin: 30px auto 10px;
     background: transparent;
     border: 1px solid $yellow;
+
+    &:focus {
+        outline: 4px dotted $yellow;
+        outline-offset: 1px;
+    }
 }
 
 

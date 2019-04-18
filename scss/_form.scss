@@ -157,6 +157,7 @@
     }
 
     th {
+        color: $white; // linux chrome requires this
         padding-bottom: .5rem;
         border-bottom: 1px solid $white;
     }
