@@ -23,5 +23,6 @@ export function renderGame(game: IGame, container: HTMLElement) {
 }
 
 export function gameReadyToPlay(game: IGame) {
-    return game.player1.name !== 'TBD' || game.player2.name !== 'TBD';
+    console.log(game.id, game.player1, game.player2, game.player1.name !== 'TBD' || game.player2.name !== 'TBD')
+    return game.player1.name !== 'TBD' && game.player2.name !== 'TBD';
 }
