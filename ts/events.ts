@@ -2,6 +2,8 @@ import { inputPlayers } from "./player-input";
 import { addResultIcon } from "./setup";
 import { IGame, IPlayer } from "./types";
 import { constrainFocus } from "./utilities";
+import * as gamesPlayed from "./games-playered";
+import { updateGamesLeftElement } from "./element-updates";
 
 const formSelector = '#submit-game';
 
@@ -121,6 +123,10 @@ export function setupWinnerDeclaredInModalEvent(games: IGame[]) {
 
             match.declareWinner(winner, [firstPlayerScore, secondPlayerScore]);
 
+            playCount++;
+            updateGamesPlayedElement(playCount);
+            updateGamesLeftElement();
+
             const formContainer = document.querySelector('.form-container') as HTMLElement;
             formContainer.hidden = true;
             const lastClickedGame = document.querySelector('[data-last-focused-game="true"]') as HTMLElement;
@@ -233,4 +239,11 @@ export function showTournamentHeadline(name: string) {
     const elt = document.getElementById('tournament-name-heading') as HTMLElement;
     elt.textContent = name;
     elt.parentElement.style.display = 'block';
+}
+
+export let playCount: number = 0;
+
+export function updateGamesPlayedElement(gamesPlayed: number) {
+    const elt = document.querySelector('.number-games-played') as HTMLElement;
+    elt.textContent = gamesPlayed.toString();
 }

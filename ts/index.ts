@@ -11,6 +11,7 @@ import { createRoundContainers, getNumberOfRounds } from "./rounds";
 import { setupSettingsToggle } from "./settings";
 import { addByes, assignParentGames, createBracket, createGame, flattenGames, renderGamesInRoundContainers } from "./setup";
 import { IGame, IPlayer } from "./types";
+import { updateGamesLeftElement } from "./element-updates";
 
 export const players = [];
 export const useMockPlayers: boolean = false;
@@ -46,8 +47,12 @@ export async function startTournament(e: CustomEvent) {
 
     const withParents = assignParentGames(tourney);
     const flattenedGames = flattenGames(withParents, []);
+    const numberOfGames = flattenedGames.filter(game => !game.hasBye).length;
     const games = markByesAsFinished(flattenedGames);
+
+    // Render a few things
     renderGamesInRoundContainers(games, tourneyElt);
+    updateGamesLeftElement(numberOfGames)
 
     // Event setup
     setUpGameFinishModalEvent(games);
