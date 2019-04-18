@@ -3,11 +3,11 @@
 }
 
 
-#player-input-form, {
+#player-input-form {
    width: 100%;
    display: flex;
    flex-direction: column;
-   justify-content: center;
+   justify-content: start;
    align-items: center;
    padding-top: 2.5rem;
 }
@@ -42,13 +42,16 @@
     }
 }
 
-.tournament-name-container {
-    margin-bottom: .5rem;
+// .tournament-name-container {
+//     margin-bottom: .5rem;
+// }
+
+.form-player-input-container {
+    flex: 5 1 70%;
 }
 
 .form-player-input-container,
 .tournament-name-container {
-    flex: 5 1 70%;
 
     .input.name {
         padding: .5em;

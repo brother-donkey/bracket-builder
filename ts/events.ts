@@ -217,6 +217,10 @@ export function setupStartTournamentButtonClick() {
             window.dispatchEvent(new CustomEvent('StartTournament', {
                 detail: inputPlayers
             }));
+
+            // remove beginning section from the DOM
+            const beginSection = document.getElementById('initial-section') as HTMLElement;
+            beginSection.parentElement.removeChild(beginSection);
         }
     });
 }
