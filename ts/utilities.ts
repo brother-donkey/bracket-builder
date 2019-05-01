@@ -9,20 +9,12 @@ export function getNumberOfGames(num: number): number {
     return numberOfGames;
 }
 
-export function constrainFocusToContainer(selector: string) {
-    window.addEventListener('focus', (e) => { console.log(e) });
-    window.addEventListener('focus', (e) => {
-        console.log(e.target);
-    });
-}
-
 export function constrainFocus(selector: string): (this: Window, ev: FocusEvent) => any {
     return (e: Event) => {
         const target = e.target as HTMLElement;
         if (target instanceof HTMLElement && target.closest(selector)) {
             return;
         }
-        // console.log('o');
         const container = document.querySelector(selector);
         const firstFocusable = Array.from(container.querySelectorAll(`a[href]:not([tabindex='-1']),
           area[href]:not([tabindex='-1']),
