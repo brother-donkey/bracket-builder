@@ -18,5 +18,9 @@
     "posthtml-md": "^1.1.0",
     "sass": "^1.16.1",
     "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.5.1",
+    "postcss-modules": "^1.4.1"
   }
 }
