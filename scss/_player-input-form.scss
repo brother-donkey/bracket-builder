@@ -42,9 +42,10 @@
     }
 }
 
-// .tournament-name-container {
-//     margin-bottom: .5rem;
-// }
+.tournament-name-container {
+    // this messes with linux chrome, but not osx chrome
+    margin-bottom: .5rem;
+}
 
 .form-player-input-container {
     flex: 5 1 70%;
